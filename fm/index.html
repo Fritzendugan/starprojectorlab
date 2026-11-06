@@ -108,10 +108,10 @@ so the modulator gets integrated before it touches anything. Everything below fa
 one line of algebra.</p>
 
 <h2><span class="n">02</span>Play with it</h2>
-<p class="sub" style="font-size:15px">Start a tone, then switch PM ↔ FM. With a sine modulator and
-a non-degenerate pitch ratio the depth is converted so the two are the same signal — nothing should
-change. Then alter the modulator’s shape, or its pitch, or add an offset, or use a plain 1&nbsp;:&nbsp;1
-ratio, and watch which one breaks.</p>
+<p class="sub" style="font-size:15px">Start a tone, then switch PM ↔ FM. With a sine modulator
+the depth is converted so the two are the same signal, and nothing should change — as long as the
+carrier is not a whole or half multiple of the modulator. Then alter the modulator’s shape, or its
+pitch, or add an offset, or sit on a plain 1&nbsp;:&nbsp;1 ratio, and watch which one breaks.</p>
 
 <div class="toy">
   <div class="row">
@@ -167,8 +167,8 @@ ratio, and watch which one breaks.</p>
     <div class="v">0.23 dB</div>
     <div class="d">Worst spectral bin difference between PM and FM, at a 1&nbsp;:&nbsp;3
       carrier-to-modulator ratio. Divergence 0.0049, identical 95&nbsp;% rolloff at 4401&nbsp;Hz.
-      They are the same signal — until the ratio is simple enough that sidebands land on each other,
-      which is what look 5 is for.</div>
+      They are the same signal — except when the carrier is a whole or half multiple of the
+      modulator, where sidebands land on top of each other. Look 5 is that case at 1&nbsp;:&nbsp;1.</div>
   </div>
   <div class="card">
     <div class="k">sawtooth modulator, matched deviation</div>
