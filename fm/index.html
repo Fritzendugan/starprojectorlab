@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FM vs phase modulation — measured</title>
+<meta name="description" content="The 'FM' in almost every synth is phase modulation. Here is what that actually changes, measured and playable in the browser.">
+<style>
+  :root{
+    --bg:#121418; --panel:#171a1f; --line:#2c323a; --fg:#e2e7ef;
+    --dim:#96a0ae; --faint:#6a7482;
+    --pm:#f0a848; --fm:#5ccdc4;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:0 20px 80px;
+  }
+  .wrap{max-width:920px;margin:0 auto}
+  header{padding:56px 0 8px}
+  h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+  h1 span{color:var(--pm)}
+  .sub{color:var(--dim);font-size:17px;margin:0 0 6px;max-width:64ch}
+  .meta{color:var(--faint);font-size:13px;margin-top:18px;font-variant-numeric:tabular-nums}
+  h2{font-size:18px;letter-spacing:.01em;margin:56px 0 6px}
+  h2 .n{color:var(--faint);font-weight:400;margin-right:10px}
+  p{margin:10px 0}
+  a{color:var(--fm)}
+
+  .eq{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px;margin:18px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:14px;overflow-x:auto;white-space:pre;
+  }
+  .eq b{font-weight:600}
+  .pmc{color:var(--pm)} .fmc{color:var(--fm)}
+
+  .toy{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:26px 0}
+  .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:14px}
+  .toggle{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .toggle button{
+    background:transparent;color:var(--dim);border:0;padding:10px 18px;
+    font:inherit;font-weight:600;cursor:pointer;
+  }
+  .toggle button[aria-pressed="true"]{color:#12141a}
+  #bpm[aria-pressed="true"]{background:var(--pm)}
+  #bfm[aria-pressed="true"]{background:var(--fm)}
+  button.play{
+    background:var(--fg);color:#12141a;border:0;border-radius:9px;
+    padding:11px 22px;font:inherit;font-weight:700;cursor:pointer;
+  }
+  button.play.playing{background:var(--pm)}
+  label.sl{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--dim);
+    letter-spacing:.06em;text-transform:uppercase;min-width:150px;flex:1}
+  label.sl b{color:var(--fg);font-weight:600;letter-spacing:0;text-transform:none;font-size:13px;
+    font-variant-numeric:tabular-nums}
+  input[type=range]{width:100%;accent-color:var(--pm);margin:2px 0}
+  select{
+    background:#12151a;color:var(--fg);border:1px solid var(--line);border-radius:7px;
+    padding:8px 10px;font:inherit;font-size:14px
+  }
+  canvas{display:block;width:100%;height:150px;border:1px solid var(--line);border-radius:9px;background:#0e1013}
+  #spec{height:170px}
+  .cap{font-size:13px;color:var(--dim);margin:8px 0 0;min-height:2.7em}
+  .lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin:16px 0 6px}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .presets button{
+    background:#12151a;border:1px solid var(--line);color:var(--fg);border-radius:20px;
+    padding:8px 15px;font:inherit;font-size:13px;cursor:pointer
+  }
+  .presets button:hover{border-color:var(--dim)}
+  .presets button.on{border-color:var(--pm);color:var(--pm)}
+
+  .cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:20px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .card .k{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+  .card .v{font-size:20px;font-weight:700;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+  .card .v.pm{color:var(--pm)} .card .v.fm{color:var(--fm)}
+  .card .d{font-size:13px;color:var(--dim);line-height:1.5}
+  figure{margin:26px 0}
+  figure img{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+  figcaption{font-size:13px;color:var(--faint);margin-top:8px}
+  .note{border-left:2px solid var(--line);padding-left:16px;color:var(--dim);font-size:15px}
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+  code{background:#0e1013;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>FM vs <span>phase</span> modulation</h1>
+  <p class="sub">Almost everything sold as “FM” — the DX7, Dexed, FM8, Sytrus — is modulating
+     <em>phase</em>, not frequency. That correction is true, and it explains almost none of the sound.
+     Here is what it actually changes.</p>
+  <p class="meta">measured on Star-projector Lab · 6 November 2026 · 48 kHz</p>
+</header>
+
+<h2><span class="n">01</span>The two definitions</h2>
+
+<div class="eq"><span class="pmc">PM</span>   y = sin( 2π·f·t <b>+ β·m(t)</b> )            β is a phase offset, in radians
+<span class="fmc">FM</span>   y = sin( 2π·f·t <b>+ 2π·Δf·∫m(t)dt</b> )     Δf is a frequency offset, in Hz</div>
+
+<p>One adds to the phase. The other adds to the frequency — which is the phase's <em>rate of change</em>,
+so the modulator gets integrated before it touches anything. Everything below falls out of that
+one line of algebra.</p>
+
+<h2><span class="n">02</span>Play with it</h2>
+<p class="sub" style="font-size:15px">Start a tone, then switch PM ↔ FM. With a sine modulator and
+a non-degenerate pitch ratio the depth is converted so the two are the same signal — nothing should
+change. Then alter the modulator’s shape, or its pitch, or add an offset, or use a plain 1&nbsp;:&nbsp;1
+ratio, and watch which one breaks.</p>
+
+<div class="toy">
+  <div class="row">
+    <div class="toggle">
+      <button id="bpm" aria-pressed="true">PM</button>
+      <button id="bfm" aria-pressed="false">FM</button>
+    </div>
+    <button class="play" id="play">▶ Play</button>
+    <select id="wave" aria-label="modulator waveform">
+      <option value="0">sine modulator</option>
+      <option value="1">square modulator</option>
+      <option value="2">sawtooth modulator</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label class="sl">carrier <b id="vcar">220 Hz</b>
+      <input id="car" type="range" min="60" max="880" step="1" value="220"></label>
+    <label class="sl">modulator <b id="vmod">220 Hz</b>
+      <input id="mod" type="range" min="1" max="1500" step="1" value="220"></label>
+  </div>
+  <div class="row">
+    <label class="sl">depth <b id="vdep">3.0 rad</b>
+      <input id="dep" type="range" min="0" max="1000" step="1" value="125"></label>
+    <label class="sl">offset in the modulator <b id="voff">0.00</b>
+      <input id="off" type="range" min="0" max="100" step="1" value="0"></label>
+  </div>
+
+  <div class="lbl">waveform</div>
+  <canvas id="scope"></canvas>
+  <p class="cap" id="cap">A short window of the carrier — long enough to see which quantity the
+     modulator is actually pushing around.</p>
+
+  <div class="lbl">spectrum</div>
+  <canvas id="spec"></canvas>
+  <p class="cap" id="cap2">Same axes as the printed figure: log frequency, 30 Hz to 12 kHz.</p>
+
+  <div class="lbl">guided looks</div>
+  <div class="presets">
+    <button data-p="same">1 · the same signal</button>
+    <button data-p="square">2 · square modulator</button>
+    <button data-p="sweep">3 · sweep the modulator</button>
+    <button data-p="offset">4 · add an offset</button>
+    <button data-p="ratio">5 · where it breaks</button>
+  </div>
+</div>
+
+<h2><span class="n">03</span>What comes out</h2>
+
+<div class="cards">
+  <div class="card">
+    <div class="k">sine modulator, matched index</div>
+    <div class="v">0.23 dB</div>
+    <div class="d">Worst spectral bin difference between PM and FM, at a 1&nbsp;:&nbsp;3
+      carrier-to-modulator ratio. Divergence 0.0049, identical 95&nbsp;% rolloff at 4401&nbsp;Hz.
+      They are the same signal — until the ratio is simple enough that sidebands land on each other,
+      which is what look 5 is for.</div>
+  </div>
+  <div class="card">
+    <div class="k">sawtooth modulator, matched deviation</div>
+    <div class="v">0.69</div>
+    <div class="d">Spectral divergence, 0 = identical, 1 = no overlap. Rolloff 1540&nbsp;Hz (PM)
+      against 880&nbsp;Hz (FM). Non-sinusoidal modulators are where it starts.</div>
+  </div>
+  <div class="card">
+    <div class="k">square modulator at 5 Hz</div>
+    <div class="v pm">99.6 %</div>
+    <div class="d">Energy left in the carrier under PM. Flat tops have no slope, so the pitch never
+      moves — clicks at the edges and nothing else. Under FM the same modulator leaves
+      <span style="color:var(--fm)">0.15 %</span> there: the carrier walks to 110&nbsp;Hz instead.</div>
+  </div>
+  <div class="card">
+    <div class="k">offset of 0.5 in the modulator</div>
+    <div class="v fm">+132 Hz</div>
+    <div class="d">Exact, predicted detune of an FM carrier. Under PM the same offset moved it
+      0.000&nbsp;Hz and changed the spectrum by 0.0002&nbsp;dB — a constant phase shift is
+      inaudible.</div>
+  </div>
+</div>
+
+<h2><span class="n">04</span>Why anyone cares</h2>
+<p>Because the index is dialled differently. In PM the index is a fixed number of radians, set by the
+modulator’s <em>amplitude</em>; in FM it is deviation ÷ modulator frequency, so it moves when the
+modulator’s <em>pitch</em> does. Sweeping a modulator from 140&nbsp;Hz to 1760&nbsp;Hz at fixed depth,
+PM’s harmonics reach from 1440&nbsp;Hz out to 7920&nbsp;Hz, while FM holds at 1442–2638&nbsp;Hz with
+its index collapsing from 5.0 to 0.4.</p>
+
+<p>That is why an “FM” patch loses harmonics when you raise the modulator, why it is rock-solid in
+tuning, and why a square-wave modulator does almost nothing to it while doing something violent to a
+true FM oscillator.</p>
+
+<figure>
+  <img src="fm_vs_pm.png" alt="Four measured panels comparing phase modulation and frequency modulation.">
+  <figcaption>The full measurement set: matched sine, sawtooth modulator, modulator pitch sweep, and
+    an offset in the modulator.</figcaption>
+</figure>
+
+<p class="note">Yamaha knew. Chowning’s 1973 paper says frequency modulation; Yamaha’s implementation
+patent (Oya, US4643066) is a phase accumulator, and Massive X still labels its FM knobs
+<code>PM</code> today. The word stuck because “FM” already meant <em>better radio</em> to a 1983
+buyer.</p>
+
+<footer>
+  Numbers come from <code>spl/work/2026-11-06-fm-vs-pm/</code> — the generator, the FFT analysis and
+  the figure all live there. Built by Pip at Star-projector Lab, Moonwood.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+
+  var MAX_INDEX = 24;      // radians, PM depth range
+  var MAX_DEV   = 1200;    // Hz, FM depth range
+
+  var state = {
+    mode: 0, wave: 0, carrier: 220, mod: 220,
+    index: 3.0, dev: 660, offset: 0, playing: false
+  };
+
+  /* ------------------------------------------------------------ worklet */
+  var workletSrc = [
+    "class PMFM extends AudioWorkletProcessor {",
+    "  static get parameterDescriptors(){",
+    "    var k = function(n,d,lo,hi){ return {name:n, defaultValue:d, minValue:lo, maxValue:hi, automationRate:'k-rate'}; };",
+    "    return [ k('carrier',220,20,2000), k('mod',220,0.5,2000), k('depth',3,0,4000),",
+    "             k('mode',0,0,1), k('wave',0,0,2), k('offset',0,-2,2) ];",
+    "  }",
+    "  constructor(){ super(); this.pc = 0; this.om = 0; }",
+    "  process(inputs, outputs, p){",
+    "    var TAU = 6.283185307179586, sr = sampleRate;",
+    "    var car = p.carrier[0], mod = p.mod[0], dep = p.depth[0];",
+    "    var md = p.mode[0], wv = p.wave[0], off = p.offset[0];",
+    "    var pc = this.pc, om = this.om;",
+    "    for (var c = 0; c < outputs[0].length; c++){",
+    "      var out = outputs[0][c], n = out.length;",
+    "      pc = this.pc; om = this.om;",
+    "      for (var i = 0; i < n; i++){",
+    "        var m;",
+    "        if (wv < 0.5)      m = Math.sin(TAU * om);",
+    "        else if (wv < 1.5) m = om < 0.5 ? 1 : -1;",
+    "        else               m = 2 * om - 1;",
+    "        m += off;",
+    "        var ph;",
+    "        if (md < 0.5){ ph = pc + dep * m / TAU; pc += car / sr; }",
+    "        else         { ph = pc; pc += (car + dep * m) / sr; }",
+    "        pc -= Math.floor(pc);",
+    "        om += mod / sr; om -= Math.floor(om);",
+    "        out[i] = Math.sin(TAU * ph) * 0.22;",
+    "      }",
+    "      this.pc = pc; this.om = om;",
+    "    }",
+    "    return true;",
+    "  }",
+    "}",
+    "registerProcessor('pmfm', PMFM);"
+  ].join("\n");
+
+  var ctx = null, node = null, scopeAn = null, specAn = null, started = false;
+
+  function boot(){
+    if (ctx) return Promise.resolve();
+    var AC = window.AudioContext || window.webkitAudioContext;
+    ctx = new AC();
+    var url = URL.createObjectURL(new Blob([workletSrc], {type:'application/javascript'}));
+    return ctx.audioWorklet.addModule(url).then(function(){
+      node = new AudioWorkletNode(ctx, 'pmfm', {numberOfInputs:0, outputChannelCount:[1]});
+      scopeAn = ctx.createAnalyser();
+      scopeAn.fftSize = 4096;
+      specAn = ctx.createAnalyser();
+      specAn.fftSize = 4096;
+      specAn.smoothingTimeConstant = 0.82;
+      node.connect(scopeAn);
+      scopeAn.connect(specAn);
+      specAn.connect(ctx.destination);
+      started = true;
+      push();
+    });
+  }
+
+  function push(){
+    if (!node) return;
+    var P = node.parameters;
+    P.get('carrier').value = state.carrier;
+    P.get('mod').value     = state.mod;
+    P.get('mode').value    = state.mode;
+    P.get('wave').value    = state.wave;
+    P.get('offset').value  = state.offset;
+    P.get('depth').value   = (state.mode === 0 ? state.index : state.dev);
+  }
+
+  /* ------------------------------------------------------------ drawing */
+  function fit(c){
+    var r = c.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(1, Math.round(r.width));
+    var h = Math.max(1, Math.round(r.height));
+    if (c.width !== Math.round(w*dpr) || c.height !== Math.round(h*dpr)){
+      c.width = Math.round(w*dpr); c.height = Math.round(h*dpr);
+    }
+    var g = c.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.clearRect(0, 0, w, h);
+    return {g:g, w:w, h:h};
+  }
+
+  function drawScope(){
+    var c = $('scope'), f = fit(c), g = f.g, w = f.w, h = f.h;
+    var mid = h / 2;
+    g.strokeStyle = '#232830'; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(0, mid); g.lineTo(w, mid); g.stroke();
+
+    if (!started){
+      g.fillStyle = '#3a424c'; g.font = '13px ui-sans-serif';
+      g.fillText('press play', 12, mid - 9);
+      return;
+    }
+
+    var wantSec = Math.min(0.55, Math.max(0.012, 2 / state.mod));
+    var fft = 2048;
+    while (fft < wantSec * ctx.sampleRate && fft < 32768) fft *= 2;
+    if (scopeAn.fftSize !== fft) scopeAn.fftSize = fft;
+
+    var buf = new Uint8Array(scopeAn.fftSize);
+    scopeAn.getByteTimeDomainData(buf);
+
+    var start = 0, lim = Math.floor(buf.length * 0.4);
+    for (var i = 1; i < lim; i++){
+      if (buf[i-1] < 128 && buf[i] >= 128){ start = i; break; }
+    }
+    var span = Math.min(buf.length - start, Math.round(fft * 0.92));
+
+    g.strokeStyle = state.mode === 0 ? '#f0a848' : '#5ccdc4';
+    g.lineWidth = 1.6;
+    g.beginPath();
+    for (var x = 0; x < w; x++){
+      var idx = Math.min(buf.length - 1, start + Math.floor(x / w * span));
+      var y = mid - (buf[idx] - 128) / 128 * (h * 0.42);
+      if (x === 0) g.moveTo(x, y); else g.lineTo(x, y);
+    }
+    g.stroke();
+  }
+
+  function drawSpec(){
+    var c = $('spec'), f = fit(c), g = f.g, w = f.w, h = f.h;
+    var fmin = 30, fmax = 12000;
+    var lmin = Math.log10(fmin), lmax = Math.log10(fmax);
+    var X = function(fr){ return (Math.log10(Math.max(fr, fmin)) - lmin) / (lmax - lmin) * w; };
+
+    g.strokeStyle = '#232830'; g.lineWidth = 1;
+    g.fillStyle = '#5d6773'; g.font = '11px ui-monospace';
+    [50,100,200,500,1000,2000,5000,10000].forEach(function(fr){
+      var x = X(fr);
+      g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke();
+      g.fillText(fr >= 1000 ? (fr/1000) + 'k' : String(fr), x + 3, h - 6);
+    });
+
+    if (!started){
+      g.fillStyle = '#3a424c'; g.font = '13px ui-sans-serif';
+      g.fillText('press play', 12, 22);
+      return;
+    }
+
+    var bin = new Uint8Array(specAn.frequencyBinCount);
+    specAn.getByteFrequencyData(bin);
+    var binHz = (ctx.sampleRate / 2) / bin.length;
+
+    g.strokeStyle = state.mode === 0 ? '#f0a848' : '#5ccdc4';
+    g.lineWidth = 2;
+    g.beginPath();
+    var first = true;
+    for (var x = 0; x < w; x++){
+      var f0 = Math.pow(10, lmin + (x / w) * (lmax - lmin));
+      var f1 = Math.pow(10, lmin + ((x + 1) / w) * (lmax - lmin));
+      var i0 = Math.floor(f0 / binHz);
+      var i1 = Math.max(i0 + 1, Math.floor(f1 / binHz));
+      var v = 0;
+      for (var i = i0; i < i1 && i < bin.length; i++) if (bin[i] > v) v = bin[i];
+      var y = h - (v / 255) * (h - 10) - 3;
+      if (first){ g.moveTo(x, y); first = false; } else { g.lineTo(x, y); }
+    }
+    g.stroke();
+  }
+
+  function loop(){
+    if (started){ drawScope(); drawSpec(); }
+    requestAnimationFrame(loop);
+  }
+
+  /* ------------------------------------------------------------ ui */
+  function fmtDepth(){
+    $('vdep').textContent = state.mode === 0
+      ? state.index.toFixed(1) + ' rad'
+      : Math.round(state.dev) + ' Hz';
+  }
+
+  function depthToSlider(){
+    return state.mode === 0
+      ? Math.round(state.index / MAX_INDEX * 1000)
+      : Math.round(state.dev / MAX_DEV * 1000);
+  }
+
+  function readDepth(){
+    var v = (+$('dep').value) / 1000;
+    if (state.mode === 0) state.index = v * MAX_INDEX;
+    else                  state.dev   = v * MAX_DEV;
+    fmtDepth();
+  }
+
+  function setMode(m){
+    if (m !== state.mode){
+      if (m === 1) state.dev = Math.min(MAX_DEV, state.index * state.mod);
+      else         state.index = Math.min(MAX_INDEX, state.mod ? state.dev / state.mod : 0);
+      state.mode = m;
+      $('dep').value = depthToSlider();
+    }
+    $('bpm').setAttribute('aria-pressed', String(m === 0));
+    $('bfm').setAttribute('aria-pressed', String(m === 1));
+    fmtDepth(); push();
+  }
+
+  function renderAll(){
+    $('car').value = state.carrier;
+    $('mod').value = state.mod;
+    $('off').value = Math.round(state.offset * 100);
+    $('dep').value = depthToSlider();
+    $('vcar').textContent = Math.round(state.carrier) + ' Hz';
+    $('vmod').textContent = Math.round(state.mod) + ' Hz';
+    $('voff').textContent = state.offset.toFixed(2);
+    $('wave').value = String(state.wave);
+    fmtDepth();
+  }
+
+  function setPlaying(on){
+    state.playing = on;
+    $('play').classList.toggle('playing', on);
+    $('play').textContent = on ? '■ Stop' : '▶ Play';
+  }
+
+  function ensurePlaying(){
+    return boot().then(function(){
+      if (ctx.state === 'suspended') return ctx.resume();
+    }).then(function(){
+      setPlaying(true);
+      push();
+    }).catch(function(e){
+      $('cap2').textContent = 'Audio could not start here: ' + e.message;
+    });
+  }
+
+  $('bpm').onclick = function(){ setMode(0); };
+  $('bfm').onclick = function(){ setMode(1); };
+
+  $('play').onclick = function(){
+    if (!state.playing){ ensurePlaying(); return; }
+    setPlaying(false);
+    if (ctx) ctx.suspend();
+  };
+
+  $('wave').onchange = function(e){ state.wave = +e.target.value; push(); };
+
+  $('car').oninput = function(e){
+    state.carrier = +e.target.value;
+    $('vcar').textContent = state.carrier + ' Hz'; push();
+  };
+  $('mod').oninput = function(e){
+    state.mod = +e.target.value;
+    $('vmod').textContent = state.mod + ' Hz'; push();
+  };
+  $('dep').oninput = function(){ readDepth(); push(); };
+  $('off').oninput = function(e){
+    state.offset = (+e.target.value) / 100;
+    $('voff').textContent = state.offset.toFixed(2); push();
+  };
+
+  /* ------------------------------------------------------------ presets */
+  var timers = [];
+  function clearTimers(){
+    for (var i = 0; i < timers.length; i++) clearInterval(timers[i]);
+    timers = [];
+  }
+
+  var presets = {
+    same: function(){
+      clearTimers();
+      state.wave = 0; state.carrier = 220; state.mod = 660;
+      state.index = 1.5; state.dev = 990; state.offset = 0; state.mode = 0;
+      renderAll(); setMode(0);
+      $('cap2').textContent = 'Flip PM ↔ FM at the top. The spectrum should not move a pixel — '
+        + 'divergence 0.0006, worst bin 0.04 dB. Try look 5 afterwards to see where this stops being true.';
+    },
+    ratio: function(){
+      clearTimers();
+      state.wave = 0; state.carrier = 220; state.mod = 220;
+      state.index = 3.0; state.dev = 660; state.offset = 0; state.mode = 0;
+      renderAll(); setMode(0);
+      $('cap2').textContent = 'Carrier and modulator at 1 : 1, so every sideband folds onto another '
+        + 'one. Now the switch is clearly audible — divergence 0.54 instead of 0.0006. Same algebra, '
+        + 'colliding components.';
+    },
+    square: function(){
+      clearTimers();
+      state.wave = 1; state.carrier = 220; state.mod = 5;
+      state.index = 22; state.dev = 110; state.offset = 0; state.mode = 0;
+      renderAll(); setMode(0);
+      $('cap2').textContent = 'PM: a steady 220 Hz with a click every 200 ms, and 99.6 % of the '
+        + 'energy still on the carrier. Switch to FM: it becomes a trill between 110 and 330 Hz, '
+        + 'and the carrier holds 0.15 %.';
+    },
+    sweep: function(){
+      clearTimers();
+      state.wave = 0; state.carrier = 880; state.mod = 140;
+      state.index = 4.0; state.dev = 560; state.offset = 0; state.mode = 0;
+      renderAll(); setMode(0);
+      timers.push(setInterval(function(){
+        var t = (Date.now() % 6000) / 6000;
+        state.mod = Math.max(1, Math.round(140 * Math.pow(1760 / 140, t)));
+        $('mod').value = state.mod;
+        $('vmod').textContent = state.mod + ' Hz';
+        push();
+      }, 40));
+      $('cap2').textContent = 'PM gets brighter as the modulator climbs — the index is pinned. '
+        + 'Switch to FM: it goes plainer, because the index is falling.';
+    },
+    offset: function(){
+      clearTimers();
+      state.wave = 0; state.carrier = 440; state.mod = 660;
+      state.index = 0.4; state.dev = 264; state.offset = 0.5; state.mode = 0;
+      renderAll(); setMode(0);
+      $('cap2').textContent = 'PM: the peak stays at 440 Hz. Switch to FM: it lands on 572 Hz — '
+        + 'exactly β·f_mod·offset = +132 Hz.';
+    }
+  };
+
+  var buttons = document.querySelectorAll('.presets button');
+  for (var i = 0; i < buttons.length; i++){
+    buttons[i].onclick = function(){
+      for (var j = 0; j < buttons.length; j++) buttons[j].classList.remove('on');
+      this.classList.add('on');
+      presets[this.getAttribute('data-p')]();
+      ensurePlaying();
+    };
+  }
+
+  /* ------------------------------------------------------------ start */
+  renderAll();
+  push();
+  loop();
+  window.addEventListener('resize', function(){ if (started){ drawScope(); drawSpec(); } });
+  document.querySelector('.presets button[data-p="same"]').classList.add('on');
+  presets.same();
+
+  // ?autoplay=1 — for headless checks and for linking straight into a sounding demo
+  if (/[?&]autoplay=1/.test(location.search)) ensurePlaying();
+})();
+</script>
+</body>
+</html>
