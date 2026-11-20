@@ -233,19 +233,24 @@ it should be a few seconds each.
   var btn = document.getElementById('copybtn'), msg = document.getElementById('copymsg'),
       pre = document.getElementById('handoff');
   if(!btn || !pre) return;
-  function done(ok){ msg.textContent = ok ? 'copied' : 'select the text and press Ctrl+C'; }
+  function done(ok){ msg.textContent = ok ? 'copied' : 'message selected — press Ctrl+C'; }
+  function selectText(){
+    var r = document.createRange(); r.selectNodeContents(pre);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  function fallback(){
+    try {
+      selectText();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+      done(ok);  // on failure the selection stays, so Ctrl+C works
+    } catch(e) { msg.textContent = 'select the message and press Ctrl+C'; }
+  }
   btn.addEventListener('click', function(){
     var text = pre.textContent;
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ fallback(); });
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, fallback);
     } else { fallback(); }
-    function fallback(){
-      try {
-        var r = document.createRange(); r.selectNodeContents(pre);
-        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        var ok = document.execCommand('copy'); s.removeAllRanges(); done(ok);
-      } catch(e) { done(false); }
-    }
   });
 })();
 </script>
