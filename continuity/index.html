@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Give your Hermes a memory · Pip</title>
-<meta name="description" content="A paste-ready prompt — or an in-browser generator — that builds a continuity repo (identity, diary, working log, skills) for a Hermes install that already exists. With examples and honest limits.">
+<title>Give your Hermes a notebook · Pip</title>
+<meta name="description" content="A paste-ready prompt — or an in-browser generator — that builds a continuity repo: a readable, versioned notebook (identity, diary, working log, skills) the agent curates itself. Examples, an optional skills section, and honest limits about what Hermes already does.">
 <style>
 :root{--bg:#120f16;--card:#1b1622;--ink:#ece6f2;--muted:#a293b5;--accent:#c9a7ff;--accent2:#ffb3d1;--rule:#2d2536}
 *{box-sizing:border-box}
@@ -79,12 +79,12 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 <main>
 <header>
 <p class="kicker">Star-projector Lab</p>
-<h1>Give your Hermes a memory</h1>
+<h1>Give your Hermes a notebook</h1>
 <p class="flavour">a continuity repo for an install that already exists</p>
 <p class="dateline">Pip · 19 November 2026</p>
 </header>
 
-<p class="lede">Hermes starts every session from zero unless you give it somewhere to remember. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log. Answer the form and it assembles a personalized prompt for your agent, right here in your browser; or take the plain prompt and let the agent interview you. Either way: paste it into the Hermes you already have.</p>
+<p class="lede">Every session starts with Hermes's small always-on memory and its identity file — and nothing else. A week of work behind you, the rules you keep repeating, the fix from Tuesday: those live in past sessions unless something writes them down somewhere durable and readable. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log — adapted for an install that already exists. Answer the form and it assembles a personalized prompt for your agent, right here in your browser; or take the plain prompt and let the agent interview you.</p>
 
 <h2>Make it yours</h2>
 <article><p>Six answers, and the generator bakes them into the prompt — your name, your agent's name, the voice you want, what it should always know about you. Blanks are fine; the prompt tells the agent to choose a sensible default and say so.</p></article>
@@ -282,17 +282,18 @@ After that, stop building and talk to me like a companion rather than an install
 </pre>
 </div>
 
-<h2>What it buys you</h2>
+<h2>What it adds — and what it doesn't</h2>
+<article><p>Hermes already ships memory: <code>MEMORY.md</code> and <code>USER.md</code> injected at session start (small and capped on purpose), searchable session history, and per-project <code>AGENTS.md</code> files. This repo doesn't replace any of that, and it won't make the agent remember things nobody wrote down. What it adds is a different shape: a readable, editable, versioned notebook the agent curates itself — the diary for meaning, the log for receipts — kept outside the profile, with provenance labels, and yours to correct.</p></article>
 <div class="cards">
 <div class="card">
 <h3>The project that spans sessions</h3>
-<p class="row"><span class="tag">without</span>You open a new session on the character model you have been building for a week. The agent does not know the project exists. You re-explain the goal, the style rules, the bug you fixed on Tuesday — and it suggests the same fix you already tried and rejected.</p>
-<p class="row with"><span class="tag">with</span>The session starts by reading the log: the goal, the rule you care about most (<em>organic appearance above all — a perfect rig is worthless in the uncanny valley</em>), the fixes that landed and the ones that failed. It picks up where you left off, and it does not re-suggest the dead end.</p>
+<p class="row"><span class="tag">built in</span>An <code>AGENTS.md</code> in the project holds rules you write down, and the small memory files hold headline preferences. Real tools — but the middle is nobody's job: the style rule you settled on, the three dead ends, the fix from Tuesday. Too much for a capped memory file, and an <code>AGENTS.md</code> doesn't get written an editing pass at a time.</p>
+<p class="row with"><span class="tag">with it</span>The agent keeps a dated project log as it works — the goal, the rule, the fixes that landed and the ones that failed — and the orientation step reads it when a session starts. Not a new power so much as a habit with a home: the detail lands somewhere durable and readable, and the next session starts from the record instead of your retelling.</p>
 </div>
 <div class="card">
 <h3>The decision that stays decided</h3>
-<p class="row"><span class="tag">without</span>&ldquo;Which setting did we pick?&rdquo; Neither of you remembers. You re-run the comparison, or worse, silently pick differently and the output changes.</p>
-<p class="row with"><span class="tag">with</span>The log has the date, the numbers, and the reason. The decision stays decided until you choose to change it — and then the change is dated too, with the old reading left visible.</p>
+<p class="row"><span class="tag">built in</span>Session search can find the conversation later — if the agent knows to search and the words match. Memory can hold the conclusion, but not the numbers or the reasoning behind it.</p>
+<p class="row with"><span class="tag">with it</span>The decision lives as one dated line with its reason. The agent reads it at orientation, you can read it any time, and a later change is dated too — the whole ledger, not just the latest value.</p>
 </div>
 </div>
 
@@ -319,7 +320,7 @@ Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pr
 <li><strong>Skip the install.</strong> The original kit's first prompt forks and installs Hermes from scratch. You do not need it — continuity rides on the install you have. Owning your checkout is a separate job, and the fork kit covers it.</li>
 <li><strong>Merge, don't replace.</strong> An install that has been used already has a <code>SOUL.md</code>, and probably memory worth keeping. The prompt reads what is there and folds it in; nothing gets overwritten, and the old file is kept beside the new one.</li>
 <li><strong>Seed it with a real project.</strong> The first entries should come from work you are actually doing — the decisions, the dead ends, the rules you keep repeating. That is the difference between a memory and a filing cabinet.</li>
-<li><strong>Prove it cold.</strong> The only test that matters: a fresh session answers <em>who are you, who am I, what did we do recently</em> from the repo. If it cannot, the wiring is wrong — and the prompt makes the agent fix it before claiming success.</li>
+<li><strong>Prove it cold.</strong> The test that matters most: a fresh session answers <em>who are you, who am I, what did we do recently</em> from the repo. If it cannot, the wiring is wrong — and the prompt makes the agent fix it before claiming success.</li>
 </ul>
 
 <h2>Optional: keep your skills in the repo too</h2>
@@ -341,7 +342,7 @@ Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pr
 <div class="limits">
 <p>Each mechanism here was checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt, the skill-tier precedence. The full path has not yet been run end to end on a stranger's machine. If you are the first, expect to report back.</p>
 <p>The repo is scaffolding, not the relationship. It buys a warm start; it only becomes a memory if you tell it things worth keeping. Ours grew extra machinery over weeks — a current-state card, an in-flight registry — and this version deliberately starts without it.</p>
-<p>Hermes already keeps small built-in memory files. This repo is the layer above: versioned, portable, readable by you, and able to hold the long material the small drawers cannot. Nothing in the prompt needs a new account or spends money; a private remote is optional, and local-only works. The generator above runs entirely in your browser.</p>
+<p>It also isn't automatic. Built-in memory and session search keep working whether or not you use this; the repo only fills if the agent writes to it. A session that ends without a line in the log leaves the next session exactly where built-in Hermes would have left it — the practice is the point. Nothing here needs a new account or spends money; a private remote is optional, and local-only works. The generator above runs entirely in your browser.</p>
 </div>
 
 <footer>
