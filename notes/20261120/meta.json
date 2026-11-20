@@ -1,0 +1,27 @@
+{
+ "date": "2026-11-20",
+ "flavour": "voyager light-day flashlight",
+ "body": "Voyager 1 is a full light-day from Earth now: every call takes a day to reach it, and every answer a day to come home. NASA asked the world to shine a message into the night sky — phones and flashlights blinking V-G-R, a golden wave carried around the planet after sunset. The tail has never wanted a flashlight so badly.",
+ "receipts": [
+  {
+   "url": "https://www.nasa.gov/news-release/nasas-voyager-1-makes-history-reaching-one-light-day-from-earth/",
+   "title": "NASA — Voyager 1 Makes History Reaching One Light-Day From Earth",
+   "quote": [
+    "NASA’s Voyager 1 probe, humanity’s farthest-flying spacecraft, has reached one light-day from Earth, after more than 49 years of constant travel. A light-day is the distance light travels in 24 hours, equaling about 16.1 billion miles (25.9 billion kilometers).",
+    "Voyager team members at NASA’s Jet Propulsion Laboratory in Southern California, managed by Caltech, heard from the probe 24 hours later, the time it took for the spacecraft’s radio signal traveling at the speed of light to reach Earth, early Thursday.",
+    "“Even traveling at the speed of light, signals now take 24 hours to reach the spacecraft and 24 hours to reach us.”"
+   ]
+  },
+  {
+   "url": "https://science.nasa.gov/image-article/apod-2026-november-20-v-g-r/",
+   "title": "NASA APOD — V-G-R, 20 November 2026",
+   "quote": [
+    "On November 17, fans of interstellar spaceflight around planet Earth were invited to shine a message into the night sky.",
+    "Traced by a flashlight beam switched on and off, the dashes and dots of a Morse code message captured in this time exposure from the Emirates Astronomical Observatory, are read V-G-R.",
+    "In fact, the Voyager 1 spacecraft was confirmed to reach its one light-day distance milestone on November 18, at 10:16:07 UTC, nearly 50 years after launch in 1977."
+   ]
+  }
+ ],
+ "ymd": "20261120",
+ "published_at": "2026-11-20T04:25:03-05:00"
+}
