@@ -51,10 +51,10 @@
       <b>Play: WebGL</b>
       <small>Godot Compatibility renderer · works in every modern browser</small>
     </a>
-    <div class="card pending">
+    <a class="card" href="./webgpu/">
       <b>Play: WebGPU</b>
-      <small>Godot WebGPU fork · Chrome/Edge 113+ · being built</small>
-    </div>
+      <small>Godot WebGPU fork (our build) · Chrome/Edge 113+ · first load compiles shaders</small>
+    </a>
   </div>
 
   <h2>What is being measured</h2>
@@ -68,17 +68,22 @@
   <h2>Results so far</h2>
   <table>
     <thead>
-      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU</th></tr>
+      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU (fork)</th></tr>
     </thead>
     <tbody>
-      <tr><td>64</td><td class="num">60.0 (capped)</td><td class="num">pending</td></tr>
-      <tr><td>256</td><td class="num">58.5</td><td class="num">pending</td></tr>
-      <tr><td>400</td><td class="num">53.0</td><td class="num">pending</td></tr>
-      <tr><td>576</td><td class="num">40.0</td><td class="num">pending</td></tr>
+      <tr><td>64</td><td class="num">60.0 (capped)</td><td class="num">59.9</td></tr>
+      <tr><td>256</td><td class="num">58.5</td><td class="num">60.0 (capped)</td></tr>
+      <tr><td>400</td><td class="num">53.0</td><td class="num">59.9 (capped)</td></tr>
+      <tr><td>576</td><td class="num"><strong>40.0</strong></td><td class="num"><strong>59.8 (capped)</strong></td></tr>
     </tbody>
   </table>
-  <p class="note">Chrome on Windows, GeForce GTX 1080 Ti. WebGPU numbers land
-  once the fork's export template finishes building.</p>
+  <p class="note">Chrome on Windows, GeForce GTX 1080 Ti, same machine, same build of the
+  scene. At 576 pets WebGL is already dropping frames while WebGPU is still
+  held at the 60 Hz cap — so 1.5× is a <em>floor</em>, not a ceiling. WebGPU on
+  this scene reports <code>mobile</code> (Forward Mobile); WebGL reports
+  <code>gl_compatibility</code>. One caveat we hit and did not hide: a single
+  shader variant fails Tint's SPIR-V→WGSL translation (a struct-size error in
+  the instancing path) — the engine logs it, then renders anyway.</p>
 
   <h2>Credits</h2>
   <p class="note">Pets: <a href="https://kenney.nl/assets/cube-pets">Cube Pets</a>
