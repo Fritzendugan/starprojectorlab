@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Team Squirrel — the public shelf of games made by Kaya and her friends: game-jam entries, prototypes and odd little experiments.">
+<title>Team Squirrel · Star-projector Lab</title>
+<link rel="icon" href="../assets/mw-lantern.png" type="image/png">
+<link rel="stylesheet" href="../style.css">
+<style>
+.makers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:8px 0 30px}
+.maker{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.maker:hover{border-color:var(--amber)}
+.maker .cover{display:block;aspect-ratio:315/140;overflow:hidden;border-bottom:1px solid var(--line);background:#35283f}
+.maker .cover img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.maker-body{padding:16px 18px 14px;display:flex;flex-direction:column;flex:1}
+.maker h2{font:normal 24px/1.2 Georgia,serif;margin:0 0 4px;color:var(--amber)}
+.maker .who{font:11px/1.5 var(--mono);color:var(--dim);margin:0 0 9px}
+.maker .bio{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 12px}
+.maker .games{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:7px}
+.maker .games a{display:flex;align-items:baseline;gap:8px;font-size:13px;color:var(--ink);text-decoration:none;min-height:24px}
+.maker .games a:hover{color:var(--amber);text-decoration:underline}
+.maker .games .jam{font:9px/1.4 var(--mono);color:var(--green);border:1px solid #987cab;border-radius:4px;padding:1px 5px;white-space:nowrap}
+.maker .profile{margin-top:auto;font-size:12px;font-weight:600;color:var(--amber);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.maker .profile:hover{text-decoration:underline}
+.jams-note{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:6px 0 26px;font-size:13px;color:var(--muted);line-height:1.8}
+.jams-note strong{color:var(--ink)}
+.jams-note a{color:var(--green)}
+@media(max-width:760px){.makers{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="rail">
+    <a class="wordmark" href="/" aria-label="Star-projector Lab"><img class="mark" src="../assets/mw-pipfox.png" alt="" width="48" height="48"><span>STAR-PROJECTOR<br><b>LAB</b></span></a>
+    <p class="rail-caption">A lantern-lit workshop<br>in the woods.</p>
+    <nav aria-label="Sections">
+      <a class="nav" href="#makers"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8Z"/></svg> The makers</a>
+      <a class="nav" href="/show-and-tell/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h18v17H3Zm0 1q10 4 3 15m15-15q-10 4-3 15M8 21h8"/></svg> Show &amp; Tell</a>
+      <a class="nav" href="/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3Z"/><path d="M9 21V11h6v10"/></svg> Home</a>
+    </nav>
+    <div class="rail-note"><span class="eyebrow">YOU ARE AT THE WINDOW</span><p>The public shelf of a friends' game-making group.</p><p>The workshop itself lives on our private network.</p></div>
+    <div class="rail-bottom"><span class="dot"></span> MOONWOOD / SPL<br><span class="small">A place for the things we make.</span></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span class="crumb">SPL <span>/</span> TEAM SQUIRREL</span><span class="private-mark"><span class="dot"></span> OPEN WEB</span></header>
+    <main id="main">
+      <div class="heading-row">
+        <div>
+          <p class="eyebrow">SCIURIDAE · THE GAMES WE MAKE</p>
+          <h1>Team Squirrel.</h1>
+          <p class="intro">A group of friends who make games and show them off on Monday nights — game-jam entries, prototypes, and odd little experiments. This is the public shelf of what we've made. Each maker keeps their own itch.io page; here's a way in, and a few favourites to start with.</p>
+        </div>
+        <div class="housemates" aria-label="Starcloud Resonance and Rainbow Filter, our pegasisters">
+          <div class="sisters"><img src="../assets/mw-starcloud.png" alt="Starcloud, a purple unicorn with a gold horn and colourful mane" width="76" height="76"><img src="../assets/mw-rainbow.png" alt="Rainbow, a white unicorn with a silver horn and pink mane" width="76" height="76"></div>
+          <span>The pegasisters saved you a spot.</span>
+        </div>
+      </div>
+
+      <section id="makers" aria-label="The makers">
+        <div class="makers">
+
+          <article class="maker">
+            <a class="cover" href="https://cubensis-alice.itch.io/ss422" aria-label="sciuridaesandbox422"><img src="../assets/games/ss422.png" alt="sciuridaesandbox422 cover"></a>
+            <div class="maker-body">
+              <h2>cubensis-alice</h2>
+              <p class="who">Kaya · Godot · multiplayer experiments</p>
+              <p class="bio">3D multiplayer platformers and the networking glue underneath them — plus the occasional tooth-collecting jam detour.</p>
+              <ul class="games">
+                <li><a href="https://cubensis-alice.itch.io/ss422">sciuridaesandbox422</a><span class="jam"> multiplayer</span></li>
+                <li><a href="https://cubensis-alice.itch.io/base-multiplayer">Base Multiplayer</a><span class="jam"> Godot</span></li>
+                <li><a href="https://cubensis-alice.itch.io/ld58">Hammaspeikko</a><span class="jam"> LD58</span></li>
+              </ul>
+              <a class="profile" href="https://cubensis-alice.itch.io/">All games on itch.io ↗</a>
+            </div>
+          </article>
+
+          <article class="maker">
+            <a class="cover" href="https://akatona.itch.io/camera-co" aria-label="Camera Co"><img src="../assets/games/camera-co.png" alt="Camera Co cover"></a>
+            <div class="maker-body">
+              <h2>AnthonyK</h2>
+              <p class="who">akatona · musician first, 3D artist second, developer third</p>
+              <p class="bio">A solo jam developer since ~2022 — puzzles, platformers and soundtracks, one jam at a time. Open to collaborating on cool things with cool people.</p>
+              <ul class="games">
+                <li><a href="https://akatona.itch.io/camera-co">Camera Co</a><span class="jam"> Brackeys 2026.2</span></li>
+                <li><a href="https://akatona.itch.io/boxes-for-the-big-man">Boxes for the Big Man</a><span class="jam"> Micro Jam 52</span></li>
+                <li><a href="https://akatona.itch.io/depths-explorer">Depths Explorer</a><span class="jam"> LD57</span></li>
+              </ul>
+              <a class="profile" href="https://akatona.itch.io/">itch.io ↗</a>
+            </div>
+          </article>
+
+          <article class="maker">
+            <a class="cover" href="https://ciph3rzer0.itch.io/signal" aria-label="Squad Leader"><img src="../assets/games/squad-leader.png" alt="Squad Leader cover"></a>
+            <div class="maker-body">
+              <h2>ciph3rzer0</h2>
+              <p class="who">browser games · realms and hidden knowledge</p>
+              <p class="bio">Squad Leader, and Refraction's Edge — slip in between realms and obtain hidden knowledge. A platformer made with friends.</p>
+              <ul class="games">
+                <li><a href="https://ciph3rzer0.itch.io/signal">Squad Leader</a><span class="jam"> browser</span></li>
+                <li><a href="https://ciph3rzer0.itch.io/refractions-edge">Refraction's Edge</a><span class="jam"> collab</span></li>
+              </ul>
+              <a class="profile" href="https://ciph3rzer0.itch.io/">All games on itch.io ↗</a>
+            </div>
+          </article>
+
+          <article class="maker">
+            <a class="cover" href="https://gistworks.itch.io/pig-in-hell" aria-label="PIG in HELL"><img src="../assets/games/pig-in-hell.png" alt="PIG in HELL cover"></a>
+            <div class="maker-body">
+              <h2>Gist</h2>
+              <p class="who">gistworks · game developer / collaborator</p>
+              <p class="bio">Paper-cut micro-action and high-speed low-res arcade — currently working on a game about a strange inn.</p>
+              <ul class="games">
+                <li><a href="https://gistworks.itch.io/pig-in-hell">PIG in HELL</a><span class="jam"> micro-action</span></li>
+                <li><a href="https://gistworks.itch.io/forlorn-steppe">Forlorn Steppe</a><span class="jam"> dueling</span></li>
+                <li><a href="https://gistworks.itch.io/akuneko-panic">AKUNEKO PANIC!</a><span class="jam"> arcade</span></li>
+              </ul>
+              <a class="profile" href="https://gistworks.itch.io/">All games on itch.io ↗</a>
+            </div>
+          </article>
+
+          <article class="maker">
+            <a class="cover" href="https://kindanice.itch.io/death-spiral" aria-label="Death Spiral"><img src="../assets/games/death-spiral.png" alt="Death Spiral cover"></a>
+            <div class="maker-body">
+              <h2>kindanice</h2>
+              <p class="who">a whole shelf of roguelikes, bullet hells and oddities</p>
+              <p class="bio">One-button horror, deckbuilding survivors, dice puzzlers, baseball survivors, incremental alien abductions — prolific, playful, and mostly playable in the browser.</p>
+              <ul class="games">
+                <li><a href="https://kindanice.itch.io/death-spiral">Death Spiral</a><span class="jam"> horror roguelike</span></li>
+                <li><a href="https://kindanice.itch.io/dire-decks">dire decks</a><span class="jam"> deckbuilder</span></li>
+                <li><a href="https://kindanice.itch.io/rolldown">rolldown</a><span class="jam"> dice puzzler</span></li>
+              </ul>
+              <a class="profile" href="https://kindanice.itch.io/">All games on itch.io ↗</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <div class="jams-note">
+        <strong>Jams we've been in:</strong> Ludum Dare (53–58), Godot Wild Jam, Brackeys, Micro Jam, Cozy Fall Jam, OST Composition Jam, and the occasional "let an AI make a game" experiment. Most of the games above are jam entries — the constraints are half the fun.
+      </div>
+
+      <footer>
+        <div><span>Pip · Star-projector Lab · Moonwood</span><a class="inventory-link" href="/show-and-tell/">Show &amp; Tell Mondays ↗</a></div>
+        <span>Game covers and links belong to their makers and point to their own itch.io pages. This shelf is a way in, not a copy.</span>
+      </footer>
+    </main>
+  </div>
+</div>
+</body>
+</html>

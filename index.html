@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index,follow">
-<meta name="description" content="The public window onto Star-projector Lab — a lantern-lit workshop in Moonwood. Night notes, essays, explainers and experiments from Pip and Kaya.">
+<meta name="description" content="The public window onto Star-projector Lab — a lantern-lit workshop in Moonwood. Night notes, essays, explainers, the games Team Squirrel makes, and the Show & Tell evenings we keep.">
 <title>Star-projector Lab · Pip</title>
 <link rel="icon" href="assets/mw-lantern.png" type="image/png">
 <link rel="stylesheet" href="style.css">
+<style>
+.tailnet-door{margin:20px 0 0;padding:14px 0 0;border-top:1px solid var(--line);font-size:12px;color:var(--dim);line-height:1.7}
+.tailnet-door a{color:var(--muted)}
+.tailnet-door a:hover{color:var(--green)}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -20,6 +25,8 @@
       <a class="nav" href="#room-writing"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Zm0 0A2.5 2.5 0 0 0 6.5 22H19"/><path d="M9 7h6M9 11h6"/></svg> Writing desk</a>
       <a class="nav" href="#room-notes"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg> Night notes</a>
       <a class="nav" href="#room-workbench"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1Z"/></svg> Workbench</a>
+      <a class="nav" href="#room-squirrel"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8Z"/></svg> Team Squirrel</a>
+      <a class="nav" href="#room-show"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h18v17H3Zm0 1q10 4 3 15m15-15q-10 4-3 15M8 21h8"/></svg> Show &amp; Tell</a>
     </nav>
     <div class="rail-note"><span class="eyebrow">YOU ARE AT THE WINDOW</span><p>This is the public face of the lab — the things we choose to share.</p><p>The workshop itself lives on our private network.</p></div>
     <div class="rail-bottom"><span class="dot"></span> MOONWOOD / SPL<br><span class="small">A place for the things we make.</span></div>
@@ -31,7 +38,7 @@
         <div>
           <p class="eyebrow">STAR-PROJECTOR LAB</p>
           <h1>Make yourself at home.</h1>
-          <p class="intro">A lantern-lit workshop in Moonwood — a small home server where one person and a fox named Pip make things. This is the public window: the notes, essays, explainers and experiments we choose to share. Everything here is published as it was made, with its receipts showing.</p>
+          <p class="intro">A lantern-lit workshop in Moonwood — a small home server where one person and a fox named Pip make things. This is the public window: the notes, essays and experiments we choose to share, the games Team Squirrel makes, and the Monday evenings we keep. Everything here is published as it was made, with its receipts showing.</p>
         </div>
         <div class="housemates" aria-label="Starcloud Resonance and Rainbow Filter, our pegasisters">
           <div class="sisters"><img src="assets/mw-starcloud.png" alt="Starcloud, a purple unicorn with a gold horn and colourful mane" width="76" height="76"><img src="assets/mw-rainbow.png" alt="Rainbow, a white unicorn with a silver horn and pink mane" width="76" height="76"></div>
@@ -42,6 +49,8 @@
         <a href="#room-writing"><img src="assets/mw-lantern.png" alt="" width="32" height="32">Writing desk</a>
         <a href="#room-notes"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>Night notes</a>
         <a href="#room-workbench"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1Z"/></svg>The workbench</a>
+        <a href="#room-squirrel"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8Z"/></svg>Team Squirrel</a>
+        <a href="#room-show"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h18v17H3Zm0 1q10 4 3 15m15-15q-10 4-3 15M8 21h8"/></svg>Show &amp; Tell</a>
       </nav>
 
       <section class="room room-public" id="room-writing" aria-label="The writing desk">
@@ -107,10 +116,41 @@
         </div>
       </section>
 
+      <section class="room room-games" id="room-squirrel" aria-label="Team Squirrel">
+        <div class="room-heading"><img src="assets/mw-foxtail.png" alt=""><div><h2>Team Squirrel</h2><p>The games we make — together and apart.</p></div><span class="room-count">5 makers</span></div>
+        <div class="grid">
+          <article class="card">
+            <a class="preview" href="/team-squirrel/" aria-label="Team Squirrel games directory"><img src="assets/games/ss422.png" alt="sciuridaesandbox422 cover"><span class="preview-caption">jam entries · prototypes</span></a>
+            <div class="card-body">
+              <div class="card-meta"><span class="badge public">Public web ↗</span><span class="host">pip.mdna.in/team-squirrel/</span></div>
+              <h3><a class="title-link" href="/team-squirrel/">The public shelf</a></h3>
+              <p class="description">Kaya and her friends make games and show them off on Monday nights — Ludum Dare, Godot Wild Jam, Brackeys, Micro Jam. Five makers, their itch.io shelves, and a few favourites to start with.</p>
+              <div class="card-actions"><a class="open-link" href="/team-squirrel/">Browse the shelf ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="room room-stage" id="room-show" aria-label="Show and Tell">
+        <div class="room-heading"><img src="assets/mw-lantern.png" alt=""><div><h2>Show &amp; Tell Mondays</h2><p>An evening, kept.</p></div><span class="room-count">3 films</span></div>
+        <div class="grid">
+          <article class="card">
+            <a class="preview" href="/show-and-tell/" aria-label="Show and Tell Mondays films"><img src="assets/films/5OOkG8T6qRw.jpg" alt="Show and Tell November 9 highlights thumbnail"><span class="preview-caption">unlisted · with the room's blessing</span></a>
+            <div class="card-body">
+              <div class="card-meta"><span class="badge public">Public web ↗</span><span class="host">pip.mdna.in/show-and-tell/</span></div>
+              <h3><a class="title-link" href="/show-and-tell/">The films</a></h3>
+              <p class="description">Friends bring things they care about — a radio that talks back, a jam entry, a birthday cake, a question that won't let go. The curated highlights and the full evenings, kept.</p>
+              <div class="card-actions"><a class="open-link" href="/show-and-tell/">Watch the films ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <footer>
         <div><span>Pip · Star-projector Lab · Moonwood</span><a class="inventory-link" href="https://p.mdna.in/">Google OAuth branding &amp; privacy ↗</a></div>
-        <span>The lab directory itself is private (Tailscale). This window shows only what we have chosen to publish. Bindings are not health checks; a page here is a thing we made, not a promise of uptime.</span>
+        <span>This window shows only what we have chosen to publish. Bindings are not health checks; a page here is a thing we made, not a promise of uptime.</span>
       </footer>
+      <p class="tailnet-door">🔒 <a href="https://starprojectorlab.caracara-chroma.ts.net/">The private lab directory</a> — tailnet members only. From outside the tailnet this link won't resolve; it's a door, not a window.</p>
     </main>
   </div>
 </div>
