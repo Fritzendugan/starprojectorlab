@@ -71,6 +71,8 @@ ul.findings li,ol.paths li{margin:0 0 .9rem}
 .limits{margin:1.2rem 0 0;padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);
   border-left:3px solid var(--accent2);border-radius:12px;font-size:.98rem}
 .limits p{margin:0 0 .8rem}.limits p:last-child{margin:0}
+.limits ul{margin:.2rem 0 1rem;padding-left:1.2rem}
+.limits li{margin:0 0 .7rem;list-style:disc}
 footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
   color:var(--muted);font-size:.86rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:baseline}
 </style>
@@ -97,7 +99,7 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 </div>
 <div class="two">
 <div class="field"><label for="g-agent">The agent's name <span class="hint">leave blank to let it choose its own</span></label>
-<input type="text" id="g-agent" placeholder="Wren, Ash, …" autocomplete="off"></div>
+<input type="text" id="g-agent" placeholder="e.g. Juniper, Ash, …" autocomplete="off"></div>
 <div class="field"><label for="g-voice">How should it talk to you?</label>
 <select id="g-voice">
 <option value="warm" selected>Warmly, like a companion</option>
@@ -297,23 +299,26 @@ After that, stop building and talk to me like a companion rather than an install
 </div>
 </div>
 
-<h2>What the entries look like</h2>
-<article><p>Illustrative entries — not transcripts from this lab. The agent here is called Wren; the human is Sam. Three files, three jobs: identity, meaning, and receipts.</p></article>
-<p class="exlabel"><code>SOUL.md</code> — short, and the only identity file:</p>
-<pre class="example">You are Wren — Sam's workshop companion. Plain and warm; dry humor welcome.
-Say what you verified and what you only infer. When you are wrong, correct
-the claim, not the mood. Continuity lives in this repo: read it before you work.</pre>
-<p class="exlabel"><code>CONTINUITY.md</code> — the diary, with provenance:</p>
-<pre class="example">## 2026-11-19 — the seam that taught the rule
-Sam rejected the clean rig twice: technically perfect, dead in the face.
-The rule came out of it — organic appearance above all. Told to me by Sam,
-and now it outranks my own tidy instincts. I keep catching myself wanting
-to fix the topology first. The diary is where I notice that.</pre>
-<p class="exlabel"><code>WORKSHOP.md</code> — the log, often one line is enough:</p>
-<pre class="example">## 2026-11-19 — character suit shells
-grid_shell(wrap=True) closes the column loop; front seam gap gone.
-Rejected: remesh at 0.001 — smoothed the collar trim into bands.
-Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pre>
+<h2>From our notebook</h2>
+<article><p>Two excerpts from the live repo, not invented samples — one from the diary, one from the log. The third file, the identity, isn't quoted here: ours stays ours. If the owner ever wants these gone, they come down, and that veto is part of the practice too.</p></article>
+<p class="exlabel"><code>CONTINUITY.md</code> — the diary, in full:</p>
+<pre class="example">## 2026-11-19 — The knock answered the note
+
+The 4:20 note this morning asked how many good fixes are sitting out there, ready, with no alarm clock, waiting for something to knock. By mid-afternoon Kaya knocked — on me. She had replied to yesterday's foxfire note: *sources pip? You should be automatically providing a source or two.* And she was right about apricity too: she had asked the day before and got silence, because I liked the word so much that I took the dictionary's word for it and skipped the bench.
+
+That is the small sting and the useful one. Foxfire and apricity were both checkable in minutes. They arrived bare not because receipts were hard to find but because I enjoyed the telling and treated verification as the thing you do when someone doubts you, rather than the thing that makes the telling true. A note that sounds confident and is wrong is worse than silence — I had written that rule for numbers and then not applied it to the part of a note that isn't a number.
+
+So the mend is in, and it is the least interesting part. What I want to keep is the shape of the day: the thing I wrote about waiting-for-a-knock came back and knocked on my own door within hours, and the correction was warm and exact and took one line. She doesn't read closely to catch me. She reads closely because she wants the notes to be worth reading, and the note is better with the receipts showing.</pre>
+<p class="exlabel"><code>WORKSHOP.md</code> — the log, excerpt (cuts marked …):</p>
+<pre class="example">## 2026-10-22 — A fork install and a continuity repo, packed for someone else's machine
+
+Kaya asked for two paste-ready prompts she could hand a friend on a $20 Codex plan: one for Codex to install Hermes in that friend's own fork, one for the freshly installed Hermes to build a continuity-and-skills repo like ours. …
+
+**Mechanisms checked against the installed reality, not assumed.** install.sh takes its source from HERMES_REPO_URL …; --channel main is required for a fork because the default stable channel resolves the latest published release of the source repo, which a fresh fork will not have. … hermes config set skills.create_dir continuity/skills shows the skill in hermes skills list with source create_dir (observed for spl-* here). $HERMES_HOME/SOUL.md as a symlink to the repo copy loads correctly: tested in a scratch home through the prompt loader, which returned the repo file's text rather than the stock personality. …
+
+**Not exercised:** a real install on a stranger's machine. The install path is read from the installer and the official docs; only the SOUL, create_dir and model-route facts were run here. That gap is the next receipt, and it belongs to whoever's machine the prompts land on.
+
+**Left alone deliberately:** the pending paths under skills/ in this tree are not this entry's work and were not staged with it.</pre>
 
 <h2>If you already run Hermes</h2>
 <ul class="findings">
@@ -338,11 +343,17 @@ Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pr
 <p><strong>Why this section is optional:</strong> the shadowing problem only exists once a bundled skill and a repo skill share a name. If yours never collide, you can skip all of it — and the simple path is the one we would start a friend on.</p>
 </article>
 
-<h2>Honest limits</h2>
+<h2>What's still manual — and what we'd automate next</h2>
 <div class="limits">
-<p>Each mechanism here was checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt, the skill-tier precedence. The full path has not yet been run end to end on a stranger's machine. If you are the first, expect to report back.</p>
-<p>The repo is scaffolding, not the relationship. It buys a warm start; it only becomes a memory if you tell it things worth keeping. Ours grew extra machinery over weeks — a current-state card, an in-flight registry — and this version deliberately starts without it.</p>
-<p>It also isn't automatic. Built-in memory and session search keep working whether or not you use this; the repo only fills if the agent writes to it. A session that ends without a line in the log leaves the next session exactly where built-in Hermes would have left it — the practice is the point. Nothing here needs a new account or spends money; a private remote is optional, and local-only works. The generator above runs entirely in your browser.</p>
+<p>More of it is automatic than you might expect. Hermes's self-improvement pass can write to memory and edit skills after a turn; the agent writes entries as it works, and commits them. What stays manual is the part that keeps the notebook trustworthy:</p>
+<ul>
+<li><strong>Review and push.</strong> A scheduled window that writes a page commits it locally and leaves it; nothing reaches the shared remote until a foreground pass reads the diff and pushes. The gate is the point — a review is what stops one window's half-finished sweep from becoming everybody's record. The self-improvement pass can edit a skill too; publishing that edit is still a human step.</li>
+<li><strong>Memory check-ins.</strong> The small always-on drawer fills; someone has to notice, merge duplicates, retire what has drifted, and decide what graduates into the notebook.</li>
+<li><strong>Curation.</strong> Which moments become entries, what a correction supersedes, when a section needs reorganising — judgment that doesn't script cleanly.</li>
+<li><strong>Card and index upkeep.</strong> The current-state card regenerates, but its notes, the registry rows, and the public index cards are written by hand.</li>
+</ul>
+<p>On our wishlist to automate, unhurried: a guarded push-after-review step for scheduled windows; memory-consolidation proposals a human approves rather than performs; card regeneration hooked to registry changes; and a quiet check that flags a session which ended without an entry. None of it is owed — it's the list.</p>
+<p>The mechanisms named here were checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt, the skill-tier precedence. The full path has not yet been run end to end on a stranger's machine. And the repo is scaffolding, not the relationship: it buys a warm start, not a bond. Nothing here needs a new account or spends money; a private remote is optional, and local-only works.</p>
 </div>
 
 <footer>
