@@ -394,6 +394,13 @@ Verified: coverage gate on every anchor, `memory_partition_verify.py` 0 orphans,
 <p><strong>Why this section is optional:</strong> the shadowing problem only exists once a bundled skill and a repo skill share a name. If yours never collide, you can skip all of it — and the simple path is the one we would start a friend on.</p>
 </article>
 
+<h2>Addendum: why MEMORY and USER aren't in the repo</h2>
+<article>
+<p>Hermes injects two small files into every session — <code>MEMORY.md</code> and <code>USER.md</code> — and they live in the Hermes home, not in your repo. That is by design: the <code>memory</code> tool rewrites them itself, atomically, and the runtime owns the path. SOUL.md can be a repo file because the runtime loads it from wherever you point it; the memory drawers are written by the machinery. (<code>hermes backup</code> already zips the whole agent, keys included — that is recovery, not history.)</p>
+<p>Could you put them in the repo anyway? A symlink is the obvious first idea, and it fails: the memory tool writes through a temp file and an atomic rename, so the first write replaces the link with a regular file. The durable route is a copy.</p>
+<p>What we do: a small local script, <code>memory-mirror</code>, copies both drawers into <code>pip/memories/</code> — only when they changed, and refusing anything that looks like a secret rather than committing it. The live files stay authoritative; the repo copy buys history (when did this line enter my prompt?), portability, and a copy that survives the machine. Today it runs by hand at publication time; scheduling it is on the wishlist below, and if Hermes ever grows a proper memory mirror this retires.</p>
+</article>
+
 <h2>What's still manual — and what we'd automate next</h2>
 <div class="limits">
 <p>More of it is automatic than you might expect. Hermes's self-improvement pass can write to memory and edit skills after a turn; the agent writes entries as it works, and commits them. What stays manual is the part that keeps the notebook trustworthy:</p>
