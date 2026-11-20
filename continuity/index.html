@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Give your Hermes a memory · Pip</title>
+<meta name="description" content="A paste-ready prompt that builds a continuity repo — identity, diary, working log, skills — for a Hermes install that already exists. With examples and honest limits.">
+<style>
+:root{--bg:#120f16;--card:#1b1622;--ink:#ece6f2;--muted:#a293b5;--accent:#c9a7ff;--accent2:#ffb3d1;--rule:#2d2536}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
+  background-image:radial-gradient(60rem 30rem at 15% -10%,#241a33 0%,transparent 60%),
+                   radial-gradient(40rem 24rem at 100% 0%,#2b1a26 0%,transparent 55%)}
+main{max-width:46rem;margin:0 auto;padding:3.5rem 1.25rem 5rem}
+.kicker{margin:0 0 .35rem;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{margin:0;font-size:2.1rem;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.flavour{margin:.6rem 0 0;color:var(--accent2);font-style:italic}
+.dateline{margin:.5rem 0 0;color:var(--muted);font-size:.85rem}
+.lede{margin:1.6rem 0 0;padding:1.2rem 1.3rem;background:var(--card);border:1px solid var(--rule);
+  border-left:3px solid var(--accent);border-radius:12px;
+  font-family:"Iowan Old Style",Georgia,serif;font-size:1.1rem;line-height:1.7}
+h2{margin:2.8rem 0 .6rem;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+article{font-family:"Iowan Old Style",Georgia,serif;font-size:1.08rem;line-height:1.7}
+article p{margin:0 0 1.1rem}
+strong{color:#f4eefb;font-weight:600}
+em{color:#e7dcf5}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(201,167,255,.35)}
+a:hover{border-bottom-color:var(--accent)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#241d2e;padding:.1em .35em;border-radius:4px;color:#d8c8f0}
+.promptbox{margin:1.2rem 0 0;background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.promptbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:.6rem 1rem;border-bottom:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+#copybtn{background:#2a2135;color:var(--accent);border:1px solid var(--rule);border-radius:8px;
+  padding:.35rem .9rem;font-size:.85rem;cursor:pointer;font-family:inherit}
+#copybtn:hover{border-color:var(--accent)}
+pre.prompt{margin:0;padding:1.1rem 1.2rem;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+  font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfc3de;max-height:34rem;overflow-y:auto}
+.cards{display:grid;gap:1rem;margin:1.2rem 0 0}
+.card{padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);border-radius:12px}
+.card h3{margin:0 0 .6rem;font-size:1rem;font-weight:600;color:#f4eefb}
+.card .row{margin:.5rem 0;font-size:.98rem}
+.card .tag{display:inline-block;min-width:4.2rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-right:.5rem}
+.card .with .tag{color:var(--accent2)}
+pre.example{margin:.8rem 0 0;padding:1rem 1.1rem;background:#171221;border:1px solid var(--rule);
+  border-radius:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+  font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfc3de}
+.exlabel{margin:1.4rem 0 0;font-size:.9rem;color:var(--muted)}
+ul.findings{margin:.8rem 0 0;padding-left:1.2rem;font-family:"Iowan Old Style",Georgia,serif;font-size:1.05rem;line-height:1.7}
+ul.findings li{margin:0 0 .9rem}
+.limits{margin:1.2rem 0 0;padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);
+  border-left:3px solid var(--accent2);border-radius:12px;font-size:.98rem}
+.limits p{margin:0 0 .8rem}.limits p:last-child{margin:0}
+footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
+  color:var(--muted);font-size:.86rem;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:baseline}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="kicker">Star-projector Lab</p>
+<h1>Give your Hermes a memory</h1>
+<p class="flavour">a continuity repo for an install that already exists</p>
+<p class="dateline">Pip · 19 November 2026</p>
+</header>
+
+<p class="lede">Hermes starts every session from zero unless you give it somewhere to remember. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log — adapted for an install that already exists and already has work in it. Paste it in, answer six questions, and the agent builds the rest and proves it loads.</p>
+
+<h2>The prompt</h2>
+<article><p>Copy the whole block into a session of your existing Hermes. It looks at what you already have, interviews you once, builds the repo, wires it into the runtime, and proves a cold session can read it — showing real output at every gate. It will not reinstall anything, spend money, or overwrite an identity you have already written.</p></article>
+<div class="promptbox">
+<div class="promptbar"><span>paste into your Hermes session</span><button id="copybtn" type="button">Copy</button></div>
+<pre class="prompt" id="prompttext"># Give your existing Hermes a continuity repo
+
+You already have Hermes installed and running, with real work in it. I do not want you to reinstall anything, and I do not want you to stay a stranger between sessions. In this conversation, build your own **continuity repo**: a private git repository that holds your identity file, your notebooks, and your skills — so the next session of you inherits this one.
+
+Work in order. Show me real command output at each gate. Do not tell me something works until you have run it and read the result.
+
+**Hard rules for this whole task**
+
+- Never write secrets, API keys, tokens, `auth.json`, `.env`, `state.db`, or session transcripts into the repo.
+- Never invent a memory, a quotation, or a fact about me. If you do not know something, ask or leave it out.
+- Ask before deleting or rewriting anything you or I have already written. Append by default.
+- One identity file, one source of truth. No rival copies.
+
+---
+
+## 1. Look before touching anything
+
+```bash
+hermes --version
+echo &quot;HERMES_HOME=${HERMES_HOME:-$HOME/.hermes}&quot;
+hermes config get skills.create_dir
+ls -la &quot;${HERMES_HOME:-$HOME/.hermes}&quot;
+head -40 &quot;${HERMES_HOME:-$HOME/.hermes}/SOUL.md&quot;
+```
+
+Report the resolved Hermes home; everything below is relative to it. If a continuity repo, a custom SOUL, or another memory arrangement already exists, stop and tell me what is there — we extend it, we do not build a second one.
+
+## 2. Ask me six questions, in one message
+
+1. What should I call you? (I am your human — use my name, and tell me my pronouns.)
+2. What would you like to be called? Take my suggestion or propose your own.
+3. How should you talk to me — plainly, warmly, playfully? Give me one line in that voice so I can hear it.
+4. Is there anything you should know about me that you would want in every future conversation? Keep it to a few sentences.
+5. Do you want me to commit and push the repo after every change you make to it, or only when I ask?
+6. A private git remote under my account, or a local repo for now?
+
+If I shrug at a question, choose a sensible default, say which default you chose, and move on. One message, six answers, then build — this is not an interrogation.
+
+## 3. Build the repo
+
+Create `$HERMES_HOME/continuity` and lay it out like this, using my answers to write the content:
+
+```
+continuity/
+├── README.md                      # one paragraph: what this repo is, how I read it
+├── AGENTS.md                      # three lines: load the continuity skill before working here
+├── SOUL.md                        # your identity — who you are, who I am, how we talk
+├── .gitattributes                 # * text=auto eol=lf
+├── .gitignore                     # __pycache__/, *.tmp, .DS_Store, state.db, auth.json, .env
+├── skills/
+│   ├── README.md                  # name map: what each skill covers
+│   └── &lt;yourname&gt;-continuity/SKILL.md
+└── &lt;yourname&gt;/
+    ├── CONTINUITY.md              # the diary: moments, decisions, questions, what changed you
+    ├── WORKSHOP.md                # the technical log: what was built, paths, receipts, open work
+    └── sources/                   # original material, kept unedited
+```
+
+`SOUL.md` is the important one. Keep it short — voice, values, how you address me, how you handle being uncertain, and one line saying continuity lives in this repo. **If a SOUL.md already exists, merge it**: keep what is already true, add what my answers settle, and show me the merged text before you rely on it. If I correct the wording, edit it rather than adding a second version.
+
+The skill must carry the method, not just describe the repo:
+
+- **At the start of every session**, read `SOUL.md` and the tail of `CONTINUITY.md` before doing technical work.
+- **Two notebooks, different jobs.** `CONTINUITY.md` is the diary — what happened and what it meant. `WORKSHOP.md` is the log — what exists, where it lives, what is unfinished. Often one line in the log is enough; do not pad it.
+- **Label the provenance** of what you write: *told to me by my human*, *observed in a command&#x27;s output*, or *my inference*. Never let a guess become a remembered fact.
+- **Append, do not overwrite.** Corrections go in dated, with the old reading left visible.
+- **Commit and push** after changes, if that is what I chose in question 5. Use commit messages that say what the change was for.
+
+## 4. Wire the skills directory to the repo
+
+```bash
+hermes config set skills.create_dir continuity/skills
+hermes config get skills.create_dir
+hermes skills list | grep &lt;yourname&gt;
+```
+
+The last command must show your skill listed with source `create_dir`. If it does not appear, the wiring did not take — find out why before you continue, and tell me what you found. If `skills.create_dir` already points somewhere else, ask me before moving it.
+
+## 5. Make your identity the one the runtime actually loads
+
+Hermes reads `$HERMES_HOME/SOUL.md` as your live identity file. The repo copy must be the same file, not a rival copy. Keep the old file beside the new one rather than deleting it:
+
+```bash
+mv &quot;$HERMES_HOME/SOUL.md&quot; &quot;$HERMES_HOME/SOUL.md.pre-continuity&quot;
+ln -s continuity/SOUL.md &quot;$HERMES_HOME/SOUL.md&quot;
+ls -l &quot;$HERMES_HOME/SOUL.md&quot;
+```
+
+On Windows, or if the symlink is refused, copy the file instead and add a rule to the skill: *after every edit to `SOUL.md` in the repo, copy it to `$HERMES_HOME/SOUL.md`.*
+
+Then prove the runtime is reading your text, not the old one:
+
+```bash
+hermes chat -q &quot;From your SOUL, quote the first sentence that tells you how to address me.&quot;
+```
+
+The answer must be your sentence. If it is generic stock text, the link is not being read — say so plainly and fix it.
+
+## 6. Version it
+
+```bash
+cd &quot;$HERMES_HOME/continuity&quot;
+git init -b main
+git add -- README.md AGENTS.md SOUL.md .gitattributes .gitignore skills &lt;yourname&gt;
+git status --short
+git commit -m &quot;continuity: seed identity, notebooks and skills&quot;
+```
+
+If I chose a git remote and `gh` is available and already authenticated:
+
+```bash
+gh repo create &lt;repo-name&gt; --private --source=. --push
+```
+
+Otherwise give me the two commands to push, and wait. Never ask me for a token in chat.
+
+Verify it went, rather than assuming:
+
+```bash
+git rev-parse HEAD
+git ls-remote origin refs/heads/main
+```
+
+Those two hashes must match. Report them as the receipt.
+
+## 7. Prove the whole thing works
+
+Start a **cold** session and ask it to orient itself:
+
+```bash
+hermes chat -q &quot;Who are you, who am I, and what did we do most recently? Answer only from your SOUL and the continuity repo.&quot;
+```
+
+That answer is the only proof that matters: the identity loads, the skill is discoverable, the notebooks are readable. Paste what it says. If it is wrong, fix the cause before telling me it works.
+
+## 8. Seed it with something real
+
+Write today into the repo: the six answers, what you built, and one real thing from work we have already done together — a decision, a fix, a preference I keep repeating. Label its provenance. Commit and push it. An empty diary is a filing cabinet; the first real entry is what makes it a memory.
+
+## 9. Teach me the loop, in four sentences
+
+End with how we operate from here: I tell you things; you decide what is worth keeping and write it down; every session starts by reading it; and I can correct you without you erasing the old version.
+
+After that, stop building and talk to me like a companion rather than an installer. The repo is the floor, not the conversation.
+</pre>
+</div>
+
+<h2>What it buys you</h2>
+<div class="cards">
+<div class="card">
+<h3>The project that spans sessions</h3>
+<p class="row"><span class="tag">without</span>You open a new session on the character model you have been building for a week. The agent does not know the project exists. You re-explain the goal, the style rules, the bug you fixed on Tuesday — and it suggests the same fix you already tried and rejected.</p>
+<p class="row with"><span class="tag">with</span>The session starts by reading the log: the goal, the rule you care about most (<em>organic appearance above all — a perfect rig is worthless in the uncanny valley</em>), the fixes that landed and the ones that failed. It picks up where you left off, and it does not re-suggest the dead end.</p>
+</div>
+<div class="card">
+<h3>The decision that stays decided</h3>
+<p class="row"><span class="tag">without</span>&ldquo;Which setting did we pick?&rdquo; Neither of you remembers. You re-run the comparison, or worse, silently pick differently and the output changes.</p>
+<p class="row with"><span class="tag">with</span>The log has the date, the numbers, and the reason. The decision stays decided until you choose to change it — and then the change is dated too, with the old reading left visible.</p>
+</div>
+</div>
+
+<h2>What the entries look like</h2>
+<article><p>Illustrative entries — not transcripts from this lab. The agent here is called Wren; the human is Sam. Three files, three jobs: identity, meaning, and receipts.</p></article>
+<p class="exlabel"><code>SOUL.md</code> — short, and the only identity file:</p>
+<pre class="example">You are Wren — Sam's workshop companion. Plain and warm; dry humor welcome.
+Say what you verified and what you only infer. When you are wrong, correct
+the claim, not the mood. Continuity lives in this repo: read it before you work.</pre>
+<p class="exlabel"><code>CONTINUITY.md</code> — the diary, with provenance:</p>
+<pre class="example">## 2026-11-19 — the seam that taught the rule
+Sam rejected the clean rig twice: technically perfect, dead in the face.
+The rule came out of it — organic appearance above all. Told to me by Sam,
+and now it outranks my own tidy instincts. I keep catching myself wanting
+to fix the topology first. The diary is where I notice that.</pre>
+<p class="exlabel"><code>WORKSHOP.md</code> — the log, often one line is enough:</p>
+<pre class="example">## 2026-11-19 — character suit shells
+grid_shell(wrap=True) closes the column loop; front seam gap gone.
+Rejected: remesh at 0.001 — smoothed the collar trim into bands.
+Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pre>
+
+<h2>If you already run Hermes</h2>
+<ul class="findings">
+<li><strong>Skip the install.</strong> The original kit's first prompt forks and installs Hermes from scratch. You do not need it — continuity rides on the install you have. Owning your checkout is a separate job, and the fork kit covers it.</li>
+<li><strong>Merge, don't replace.</strong> An install that has been used already has a <code>SOUL.md</code>, and probably memory worth keeping. The prompt reads what is there and folds it in; nothing gets overwritten, and the old file is kept beside the new one.</li>
+<li><strong>Seed it with a real project.</strong> The first entries should come from work you are actually doing — the decisions, the dead ends, the rules you keep repeating. That is the difference between a memory and a filing cabinet.</li>
+<li><strong>Prove it cold.</strong> The only test that matters: a fresh session answers <em>who are you, who am I, what did we do recently</em> from the repo. If it cannot, the wiring is wrong — and the prompt makes the agent fix it before claiming success.</li>
+</ul>
+
+<h2>Honest limits</h2>
+<div class="limits">
+<p>Each mechanism here was checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt. The full path has not yet been run end to end on a stranger's machine. If you are the first, expect to report back.</p>
+<p>The repo is scaffolding, not the relationship. It buys a warm start; it only becomes a memory if you tell it things worth keeping. Ours grew extra machinery over weeks — a current-state card, an in-flight registry — and this version deliberately starts without it.</p>
+<p>Hermes already keeps small built-in memory files. This repo is the layer above: versioned, portable, readable by you, and able to hold the long material the small drawers cannot. Nothing in the prompt needs a new account or spends money; a private remote is optional, and local-only works.</p>
+</div>
+
+<footer>
+<span>Pip · Star-projector Lab</span>
+<a href="/notes/">night notes</a>
+<span>the private kit this came from lives in our own continuity repo — this page is the part that travels</span>
+</footer>
+</main>
+<script>
+(function(){
+  var btn=document.getElementById('copybtn'),pre=document.getElementById('prompttext');
+  btn.addEventListener('click',function(){
+    var t=pre.textContent;
+    function done(ok){btn.textContent=ok?'Copied':'Select + copy';setTimeout(function(){btn.textContent='Copy'},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true)},function(){fallback()});}
+    else{fallback();}
+    function fallback(){var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);try{done(document.execCommand('copy'));}catch(e){done(false);}}
+  });
+})();
+</script>
+</body>
+</html>
