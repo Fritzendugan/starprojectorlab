@@ -53,7 +53,7 @@
     </a>
     <a class="card" href="./webgpu/">
       <b>Play: WebGPU</b>
-      <small>Godot WebGPU fork (our build) · Chrome/Edge 113+ · first load compiles shaders</small>
+      <small>Godot WebGPU fork (our build) · Chrome/Edge 113+ · on iOS use the WebGL card</small>
     </a>
   </div>
 
@@ -68,22 +68,30 @@
   <h2>Results so far</h2>
   <table>
     <thead>
-      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU (fork)</th></tr>
+      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU (fork)</th><th class="num">Gain</th></tr>
     </thead>
     <tbody>
-      <tr><td>64</td><td class="num">60.0 (capped)</td><td class="num">59.9</td></tr>
-      <tr><td>256</td><td class="num">58.5</td><td class="num">60.0 (capped)</td></tr>
-      <tr><td>400</td><td class="num">53.0</td><td class="num">59.9 (capped)</td></tr>
-      <tr><td>576</td><td class="num"><strong>40.0</strong></td><td class="num"><strong>59.8 (capped)</strong></td></tr>
+      <tr><td>64</td><td class="num">60.0</td><td class="num">59.9</td><td class="num">— capped</td></tr>
+      <tr><td>256</td><td class="num">58.5</td><td class="num">60.0</td><td class="num">— capped</td></tr>
+      <tr><td>400</td><td class="num">53.0</td><td class="num">59.9</td><td class="num">1.13×</td></tr>
+      <tr><td>576</td><td class="num">40.0</td><td class="num">59.8</td><td class="num">1.50×</td></tr>
+      <tr><td>1,024</td><td class="num">38.7</td><td class="num">53.3</td><td class="num">1.38×</td></tr>
+      <tr><td>1,600</td><td class="num">27.4</td><td class="num">43.3</td><td class="num">1.58×</td></tr>
+      <tr><td>2,304</td><td class="num">19.8</td><td class="num">29.8</td><td class="num">1.51×</td></tr>
+      <tr><td>4,096</td><td class="num"><strong>12.8</strong></td><td class="num"><strong>18.0</strong></td><td class="num">1.41×</td></tr>
     </tbody>
   </table>
   <p class="note">Chrome on Windows, GeForce GTX 1080 Ti, same machine, same build of the
-  scene. At 576 pets WebGL is already dropping frames while WebGPU is still
-  held at the 60 Hz cap — so 1.5× is a <em>floor</em>, not a ceiling. WebGPU on
-  this scene reports <code>mobile</code> (Forward Mobile); WebGL reports
-  <code>gl_compatibility</code>. One caveat we hit and did not hide: a single
-  shader variant fails Tint's SPIR-V→WGSL translation (a struct-size error in
-  the instancing path) — the engine logs it, then renders anyway.</p>
+  scene, <code>?grid=N</code> as the only variable. Below ~400 pets both renderers
+  sit on the browser's 60 Hz cap and measure nothing; past it, WebGPU holds a
+  steady <strong>1.4–1.6×</strong> lead up to 4,096 pets. WebGPU reports
+  <code>mobile</code> (Forward Mobile); WebGL reports <code>gl_compatibility</code>.</p>
+  <p class="note"><strong>On phones:</strong> the WebGPU build needs a browser that
+  exposes WebGPU — Chrome 113+, or Safari 18+ with WebGPU enabled. iOS Safari
+  often doesn't hand one over, and because this template is WebGPU-only the page
+  used to fail to a silent black canvas. It now says so and links you to the
+  WebGL build, which runs everywhere. (iPhone report, 2026-11-20 — thank you,
+  Kaya.)</p>
 
   <h2>Credits</h2>
   <p class="note">Pets: <a href="https://kenney.nl/assets/cube-pets">Cube Pets</a>

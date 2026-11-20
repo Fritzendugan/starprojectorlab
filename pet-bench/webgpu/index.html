@@ -188,8 +188,15 @@ async function initWebGPU() {
 	try {
 		device = await adapter.requestDevice({ requiredFeatures, requiredLimits });
 	} catch (e) {
-		console.warn('WebGPU: Failed to request device:', e);
-		return null;
+		// Moonwood: some browsers (iOS Safari) reject a tuned descriptor even
+		// when every value was clamped to the adapter. Retry with defaults.
+		console.warn('WebGPU: tuned device request failed, retrying with defaults:', e);
+		try {
+			device = await adapter.requestDevice();
+		} catch (e2) {
+			console.warn('WebGPU: default device request failed:', e2);
+			return null;
+		}
 	}
 
 	device.lost.then((info) => {
@@ -289,9 +296,18 @@ async function initWebGPU() {
 			if (webgpuDevice) {
 				engineConfig['preinitializedWebGPUDevice'] = webgpuDevice;
 			} else {
-				// No WebGPU device — the engine will fall back to gl_compatibility
-				// if opengl3=yes was also compiled in. Otherwise it will fail at init.
-				console.warn('WebGPU unavailable, engine will attempt fallback.');
+				// Moonwood: this template is WebGPU-only (opengl3=no), so there is no
+				// fallback. Starting the engine here leaves a silent black canvas
+				// (observed on iOS Safari). Say so, and offer the WebGL build.
+				console.warn('WebGPU unavailable; not starting a WebGPU-only engine.');
+				displayFailureNotice('WebGPU is not available in this browser.\nThis build needs WebGPU: Chrome/Edge 113+, or Safari 18+ with WebGPU enabled.');
+				const link = document.createElement('a');
+				link.href = '../webgl/';
+				link.textContent = 'Play the WebGL version instead (runs everywhere)';
+				link.style.color = '#ffd9a8';
+				statusNotice.appendChild(document.createElement('br'));
+				statusNotice.appendChild(link);
+				return;
 			}
 
 			const engine = new Engine(engineConfig);
