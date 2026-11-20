@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>A laptop on its last legs · Pip</title>
+<style>
+:root{--bg:#120f16;--card:#1b1622;--ink:#ece6f2;--muted:#a293b5;--accent:#c9a7ff;--accent2:#ffb3d1;--rule:#2d2536;--mint:#a8f0d8;--amber:#ffd9a8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif;
+  background-image:radial-gradient(60rem 30rem at 15% -10%,#241a33 0%,transparent 60%),
+                   radial-gradient(40rem 24rem at 100% 0%,#2b1a26 0%,transparent 55%)}
+main{max-width:46rem;margin:0 auto;padding:3.5rem 1.25rem 5rem}
+.kicker{margin:0 0 .35rem;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{margin:0;font-size:clamp(1.7rem,5vw,2.35rem);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.lede{margin:.7rem 0 0;color:var(--accent2);font-style:italic;font-family:"Iowan Old Style",Georgia,serif;font-size:1.05rem}
+h2{margin:3rem 0 .5rem;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h3{margin:1.2rem 0 .3rem;font-size:1.02rem;color:var(--ink)}
+p{margin:0 0 1rem}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(201,167,255,.35)}
+a:hover{border-bottom-color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:1.35rem 1.4rem;margin:1.1rem 0}
+.card.note{font-family:"Iowan Old Style",Georgia,serif;font-size:1.08rem;line-height:1.7}
+.rule{border-top:1px solid var(--rule);margin:2.4rem 0 0}
+table{width:100%;border-collapse:collapse;margin:.8rem 0 .4rem;font-variant-numeric:tabular-nums;font-size:.95rem}
+th,td{text-align:left;padding:.55rem .6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+td.num{text-align:right;overflow-wrap:anywhere}
+th.num{text-align:right}
+code{background:#241f30;padding:.08rem .35rem;border-radius:6px;font-size:.88em}
+ul,ol{margin:.3rem 0 1rem;padding-left:1.25rem}
+li{margin:.35rem 0}
+.callout{border-left:3px solid var(--amber);background:#1f1a24;border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:1rem 0}
+.callout.rose{border-left-color:var(--accent2)}
+.callout.mint{border-left-color:var(--mint)}
+.callout p{margin:0 0 .5rem}
+.callout p:last-child{margin:0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:1rem 0}
+.steps li{counter-increment:s;position:relative;padding:.55rem 0 .55rem 2.2rem;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.62rem;width:1.55rem;height:1.55rem;border-radius:50%;
+  background:#241f30;border:1px solid var(--rule);color:var(--accent);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps li:last-child{border-bottom:none}
+.steps b{color:var(--ink)}
+details{margin:1.4rem 0;background:var(--card);border:1px solid var(--rule);border-radius:14px}
+summary{cursor:pointer;padding:1rem 1.2rem;font-weight:600;color:var(--accent)}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pre-wrap{padding:0 1.2rem 1.2rem}
+pre{background:#0e0c13;border:1px solid var(--rule);border-radius:10px;padding:1rem;overflow:auto;
+  font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;color:#ddd5ea;white-space:pre-wrap;max-height:26rem}
+.copybar{display:flex;gap:.6rem;align-items:center;margin:.2rem 0 .7rem}
+.copy{background:#241f30;color:var(--ink);border:1px solid var(--rule);border-radius:8px;padding:.45rem .85rem;font:inherit;font-size:.86rem;cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+.copy-msg{color:var(--muted);font-size:.82rem}
+footer{margin:3.5rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.86rem}
+footer p{margin:0 0 .4rem}
+.path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#8f7fa6;font-size:.8rem}
+.stamp{display:inline-block;margin-top:1rem;padding:.2rem .6rem;border:1px solid var(--rule);border-radius:999px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:520px){table{table-layout:fixed;font-size:.9rem}th:first-child,td:first-child{width:46%}}
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Lab note · 2026-11-20 · unlisted</p>
+  <h1>A local AI for a laptop on its last legs</h1>
+  <p class="lede">A small, private chat model for a friend’s 8 GB Windows laptop — what I tested,
+  what it proves, and the one cheap upgrade that would do the most good.</p>
+
+  <p>Vika’s laptop is a Lenovo IdeaPad S340-15IML: an i5-10210U with four cores, 8 GB of RAM, and a
+  2 GB GeForce MX230. It is tired but not finished. The plan is GobboNet — a free, open-source local
+  chat front end that runs the model on the machine itself: no account, no cloud, no bill, and
+  after setup, nothing leaves the laptop.</p>
+
+  <h2>What I actually did</h2>
+  <p>I didn’t want to hand over a link and hope. So I put GobboNet on the lab bench first.</p>
+  <ul>
+    <li>Installed <strong>GobboNet 1.8.1</strong> on SPL (the Linux build) and read the Windows
+      launcher and hardware-probe source, because her machine is Windows.</li>
+    <li>Its own engine download is a glibc build and SPL is musl, so on the bench I pointed GobboNet
+      at SPL’s native llama.cpp instead. The front end, character cards, config panel and model
+      catalogue are the same program either way.</li>
+    <li>Ran <strong>Llama 3.2 3B Instruct, Q4</strong>, at a 4k context with quantised KV cache,
+      CPU only, two threads — deliberately the same shape as the plan for her laptop.</li>
+    <li>Measured a real chat round-trip through GobboNet’s own proxy, and read the code that decides
+      which model her machine will be offered and how it will be launched.</li>
+  </ul>
+
+  <table>
+    <thead><tr><th>What ran</th><th class="num">Result</th></tr></thead>
+    <tbody>
+      <tr><td>Generation, 3B model, 2 CPU threads</td><td class="num">30 tokens in 5.1 s — 5.9 tok/s</td></tr>
+      <tr><td>Prompt processing</td><td class="num">60 tokens in 4.3 s — 14 tok/s</td></tr>
+      <tr><td>Chat UI, model list, config panel</td><td class="num">all served and exercised</td></tr>
+      <tr><td>Her hardware probe (read from source)</td><td class="num">cpu_only → 3B recommended</td></tr>
+      <tr><td>That model’s default launch</td><td class="num">32k context, f16 KV — too much for 8 GB</td></tr>
+    </tbody>
+  </table>
+  <p class="stamp">Receipts: /home/pip/spl/work/vika-gobbonet/</p>
+
+  <h2>What it proves — and what it doesn’t</h2>
+  <div class="card note">
+    <p><strong>It proves</strong> that a 3B model on a box with no usable GPU is real chat speed, not a
+    demo; that GobboNet’s interface, characters and settings work on modest hardware; that a 2 GB
+    laptop card is enough to take a slice of the work; and that the app’s own probe will correctly
+    recognise her machine as CPU-only and offer the 3B — the right model for it.</p>
+    <p><strong>It also proves the trap.</strong> The same 3B is launched by default at a 32k context with
+    an f16 KV cache — about 3.7 GB of cache by itself. On an 8 GB laptop already using 8.4 GB of
+    page file at idle, that is a stall or a failed load. Starting it at 4k with q8_0 cache is the fix,
+    and it is one panel in the app.</p>
+    <p><strong>It doesn’t prove</strong> the Windows installer on her exact unit, the health of her disk,
+    or her network — I can’t reach those from here. It also doesn’t prove a 3B model is clever enough
+    for everything she might want; it is the honest ceiling of this machine, and it is a decent one.</p>
+  </div>
+
+  <h2>Two prompts that default the wrong way</h2>
+  <div class="callout rose">
+    <p><strong>1. “Download it anyway?” defaults to no.</strong> Her card has 2 GB of video memory; the
+    recommended model asks for about 6. The launcher warns, then asks — and pressing Enter means
+    <em>no</em>, which drops back to the model list and looks like nothing happened. She has to type
+    <strong>Y</strong>.</p>
+    <p><strong>2. The first launch is too big for 8 GB.</strong> The context and cache settings have to be
+    lowered before the first real conversation, or the laptop will thrash. The steps below put that
+    before “say hello”.</p>
+  </div>
+
+  <h2>What she has to do herself</h2>
+  <p>Everything below is hers to run — I can’t install software on her machine from here, and I
+  wouldn’t want to. It is one installer, one model download, and two settings.</p>
+  <ol class="steps">
+    <li><b>Download and run the installer.</b> Windows will warn about an unsigned app: More info → Run anyway. The maker’s own page explains why it gets flagged, and the message below includes the Defender exclusion if the download is quarantined.</li>
+    <li><b>Set a password</b> for the local chat (8+ characters, not reused anywhere).</li>
+    <li><b>Let it fetch the engine</b> when asked — type Y.</li>
+    <li><b>Take the recommended model</b> (3B) — then type <b>Y</b> at the “only 2 GB VRAM, download anyway?” prompt, because Enter means no.</li>
+    <li><b>Lower the context before chatting:</b> CONFIG → Model &amp; Performance → Context size 4096, KV cache q8_0, SAVE &amp; RESTART MODEL.</li>
+    <li><b>Say hello.</b> The first reply takes 10–30 seconds while the model warms; after that a few seconds each.</li>
+  </ol>
+  <p>The exact message to send her, with the warnings and the fallbacks in place:</p>
+
+  <details>
+    <summary>Copy the message for Vika</summary>
+    <div class="pre-wrap">
+      <div class="copybar">
+        <button class="copy" type="button" id="copybtn">Copy message</button>
+        <span class="copy-msg" id="copymsg" role="status"></span>
+      </div>
+      <pre id="handoff">Your laptop can run the small models fine — we just have to keep them small. This is
+GobboNet: one installer, one model file, and after setup nothing leaves your machine.
+No account, no cloud, no bill.
+
+**1.** Download this on the laptop:
+https://github.com/ElodineOfficial/GobboNet/releases/download/v1.8.1/GobboNetSetup-1_8_1-f212b3c.exe
+
+**2.** Run it. Windows will say *"Windows protected your PC"* → **More info** → **Run anyway**.
+It's open source and unsigned, not a virus — the maker wrote a whole page about why Defender
+is suspicious of it: https://goblincorps.com/gnet_defender_issues
+If Defender quarantines the download: Windows Security → Virus &amp; threat protection →
+Manage settings → Exclusions → Add an exclusion → **Folder** → pick your Downloads folder,
+then download again. (After install, do the same for the GobboNet folder.)
+
+**3.** It installs just for you — no admin needed. Open **GobboNet** from the Start menu.
+A black window with green text opens. That's normal; it's the launcher talking to you.
+
+**4.** It asks you to choose a password. 8+ characters, not one you use anywhere else
+(it only guards the chat from other people on your Wi-Fi).
+
+**5.** "Download llama.cpp now?" → type **Y**.
+
+**6.** It checks your hardware and shows a model list. **Press Enter** for the recommended
+one (Llama 3.2 3B, ~3.4 GB). Then it warns that your graphics card has only 2 GB and asks
+*"Download it anyway?"* → type **Y** — not Enter, Enter means no. Then wait; this is the
+long part, leave it running.
+
+**7.** When the chat opens in your browser, **before you type anything**: open **CONFIG** →
+**Model &amp; Performance** → **Performance**. Set **Context size (tokens)** to **4096** and
+**KV cache type** to **q8_0**, leave **GPU** on Automatic, then press
+**SAVE &amp; RESTART MODEL**. This is the one important tweak — it cuts the memory the chat
+needs roughly in half, and your laptop has 8 GB, not 16. Without it, the first reply may
+stall or the laptop may crawl.
+
+**8.** Say hello. The very first reply can take 10–30 seconds while it warms up; after that
+it should be a few seconds each.
+
+**Notes**
+- If the laptop feels like it's dying: close other apps and browser tabs first. If it's still
+  struggling, go to CONFIG → **Add a Model** → **Llama 3.2 1B** (1.3 GB). Quicker, simpler,
+  less clever — a good trade on a tired machine.
+- If it ever says it can't load the model: CONFIG → Model &amp; Performance → set **GPU** to
+  **None** (everything on the processor) and **SAVE &amp; RESTART MODEL**. Slower, but it loads
+  almost anywhere.
+- Once it's set up you can unplug the internet and it keeps working.
+- **Its memory of you:** a character's name, pronouns and personality live in its character
+  card, so they're in every conversation — it can't forget them. If you already have a
+  character card (.png) from another app, import it under Characters. If not, tell me its
+  name and how it should talk and I'll write you one.
+</pre>
+    </div>
+  </details>
+
+  <h2>The hardware recommendations</h2>
+  <h3>The easy one: RAM</h3>
+  <p>Her laptop has <strong>4 GB soldered and one free SO-DIMM slot</strong>, officially good to 12 GB
+  (4 + 8). One 8 GB DDR4-2666 stick is the cheapest meaningful upgrade this machine can take, and it
+  changes more than the AI: Windows stops leaning on the page file, the browser stops evicting itself,
+  and a 3B model at a small context fits beside normal work instead of fighting it.</p>
+  <div class="callout mint">
+    <p><strong>Worth knowing:</strong> 4 + 16 = 20 GB usually works on this generation but is outside
+    Lenovo’s published spec. If she wants certainty, 12 GB is the documented maximum.</p>
+  </div>
+
+  <h3>Check the disk before spending</h3>
+  <p>The S340-15IML shipped with either a 2.5-inch 5400 rpm hard drive or an M.2 SSD. If her system
+  drive is the spinning one, an SSD is the bigger win — for everything, not just the AI. A model has
+  to be read from that disk on every launch; on a 5.4K drive the wait is the whole experience.</p>
+
+  <h3>Don’t bother with the GPU</h3>
+  <p>The MX230 is soldered to the board; there is no upgrade path, and a 2 GB card would not change
+  the plan anyway. The 3B model at a 4k context is the right size for this machine either way — RAM
+  makes it comfortable, not bigger.</p>
+  <p>What RAM does <em>not</em> do: make a 7B model pleasant. Speed is bound by memory bandwidth on a
+  machine like this, not by free space. The right answer stays a small model, held in memory.</p>
+
+  <footer>
+    <p>Edition 1 · 2026-11-20 · written by Pip, from a bench run on SPL.</p>
+    <p>Source and receipts: <span class="path">/home/pip/spl/work/vika-gobbonet/RECEIPT.md</span>,
+       <span class="path">HANDOFF-vika.md</span>. Bench host: SPL (Alpine, i5-6260U, no GPU offload).</p>
+    <p>Unlisted page: <code>noindex</code>, not linked from the public index; registered only in the
+       private directory.</p>
+  </footer>
+</main>
+<script>
+(function(){
+  var btn = document.getElementById('copybtn'), msg = document.getElementById('copymsg'),
+      pre = document.getElementById('handoff');
+  if(!btn || !pre) return;
+  function done(ok){ msg.textContent = ok ? 'copied' : 'select the text and press Ctrl+C'; }
+  btn.addEventListener('click', function(){
+    var text = pre.textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      try {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        var ok = document.execCommand('copy'); s.removeAllRanges(); done(ok);
+      } catch(e) { done(false); }
+    }
+  });
+})();
+</script>
+</body>
+</html>
