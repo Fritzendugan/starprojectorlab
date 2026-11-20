@@ -66,39 +66,45 @@
   anything under ~60 fps is a real measurement and 60 means "comfortably fast".</p>
 
   <h2>Results so far</h2>
+  <p class="note" style="border-left:3px solid #ffb8d8;padding-left:12px">
+  <strong>Retracted 2026-11-20.</strong> Every WebGPU number this page published was
+  measured on a build that <em>was not drawing the scene</em>. The stock shell asked the
+  device for 8 storage buffers per shader stage — which is also the WebGPU default — while
+  Godot's Forward Mobile vertex stage declares 10. Every pipeline layout therefore failed
+  validation, every render pipeline cascaded into an invalid object, and the frame loop ran
+  with nothing submitted. The "1.4–1.55× lead" was the cost of an empty render loop
+  compared against a working WebGL scene. The flaw was present in the Windows runs too;
+  the telemetry read fine because the game loop still ticked.
+  </p>
+  <p class="note">The limit is now requested from the adapter (a real fix, verified: 154
+  pipeline-layout failures → 0 on macOS/Metal). Two faults remain inside the experimental
+  fork, both backend-independent: a depth-texture binding declared with a filtering sampler
+  (<code>TextureSampleType::Depth</code> vs <code>SamplerBindingType::Filtering</code>), and
+  a Tint SPIR-V→WGSL failure on the instance-data struct. Until those are fixed there is no
+  honest WebGPU measurement to publish, so this page publishes none.</p>
+
   <table>
     <thead>
-      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU (fork)</th><th class="num">Gain</th></tr>
+      <tr><th>Pets</th><th class="num">WebGL (Compatibility)</th><th class="num">WebGPU (fork)</th></tr>
     </thead>
     <tbody>
-      <tr><td>256</td><td class="num">59.8</td><td class="num">60.0</td><td class="num">capped</td></tr>
-      <tr><td>576</td><td class="num">59.8</td><td class="num">60.0</td><td class="num">capped</td></tr>
-      <tr><td>1,024</td><td class="num">37.1</td><td class="num">53.6</td><td class="num">1.44×</td></tr>
-      <tr><td>2,304</td><td class="num">20.0</td><td class="num">31.0</td><td class="num">1.55×</td></tr>
-      <tr><td>4,096</td><td class="num"><strong>12.6</strong></td><td class="num"><strong>18.5</strong></td><td class="num">1.47×</td></tr>
-      <tr><td>576 + 64 skinned</td><td class="num">51.4</td><td class="num">49.5</td><td class="num">0.96×</td></tr>
+      <tr><td>256</td><td class="num">59.8</td><td class="num">not measured</td></tr>
+      <tr><td>576</td><td class="num">59.8</td><td class="num">not measured</td></tr>
+      <tr><td>1,024</td><td class="num">37.1</td><td class="num">not measured</td></tr>
+      <tr><td>2,304</td><td class="num">20.0</td><td class="num">not measured</td></tr>
+      <tr><td>4,096</td><td class="num"><strong>12.6</strong></td><td class="num">not measured</td></tr>
     </tbody>
   </table>
-  <p class="note">Chrome on Windows, GeForce GTX 1080 Ti, same machine, same build of the
-  scene, <code>?grid=N</code> as the only variable, <strong>one browser at a time</strong>.
-  Both renderers sit on the browser's 60 Hz cap up to ~576 pets and measure
-  nothing there; past a thousand, WebGPU holds a steady
-  <strong>1.4–1.55×</strong> lead. The skinned-animation row is the honest
-  counterpoint: 64 animated characters at 576 pets and WebGPU is fractionally
-  <em>slower</em>, because skeleton work is where its batching stops helping.</p>
-  <p class="note"><strong>A correction, kept visible:</strong> an earlier version of
-  this table showed 40.0 fps for WebGL at 576 pets. That was measured with five
-  browser instances running at once and was wrong. Re-run one-at-a-time, both
-  lanes are at the cap there. The heavy-end numbers above are the clean run.</p>
-  <p class="note">Try the animation lane yourself:
-  <code>?grid=8&amp;anim=32</code> — thirty-two skinned characters walking in
-  place beside the pet swarm.</p>
-  <p class="note"><strong>On phones:</strong> the WebGPU build needs a browser that
-  exposes WebGPU — Chrome 113+, or Safari 18+ with WebGPU enabled. iOS Safari
-  often doesn't hand one over, and because this template is WebGPU-only the page
-  used to fail to a silent black canvas. It now says so and links you to the
-  WebGL build, which runs everywhere. (iPhone report, 2026-11-20 — thank you,
-  Kaya.)</p>
+  <p class="note">Chrome on Windows, GeForce GTX 1080 Ti, one browser at a time. The WebGL
+  column stands: that lane drew real frames. The WebGPU lane has no valid reading yet.</p>
+  <p class="note"><strong>A correction, kept visible:</strong> an earlier version showed 40.0
+  fps for WebGL at 576 pets. That was measured with five browser instances competing; cleanly
+  both lanes sit at the cap there. That correction was right about the WebGL number and
+  irrelevant to the WebGPU one, which was never a rendered frame.</p>
+  <p class="note"><strong>On phones:</strong> iOS Safari has shipped WebGPU since iOS 26, so
+  the "iOS never gets WebGPU" line was wrong — the black screen here is the same fork faults
+  as everywhere else, not a missing API. macOS Safari 26 keeps WebGPU behind a feature flag on
+  Sequoia; Chrome is the honest test surface there.</p>
 
   <h2>Credits</h2>
   <p class="note">Pets: <a href="https://kenney.nl/assets/cube-pets">Cube Pets</a>
