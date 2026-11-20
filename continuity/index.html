@@ -61,9 +61,9 @@ textarea{resize:vertical;min-height:4.5rem}
 .cards{display:grid;gap:1rem;margin:1.2rem 0 0}
 .card{padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);border-radius:12px}
 .card h3{margin:0 0 .6rem;font-size:1rem;font-weight:600;color:#f4eefb}
-.card .row{margin:.5rem 0;font-size:.98rem}
-.card .tag{display:inline-block;min-width:4.2rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);margin-right:.5rem}
+.card .row{margin:.95rem 0 0;font-size:.98rem}
+.card .tag{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 .25rem}
 .card .with .tag{color:var(--accent2)}
 pre.example{margin:.8rem 0 0;padding:1rem 1.1rem;background:#171221;border:1px solid var(--rule);
   border-radius:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
@@ -91,7 +91,7 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 <p class="kicker">Star-projector Lab</p>
 <h1>Give your Hermes a notebook</h1>
 <p class="flavour">a continuity repo for an install that already exists</p>
-<p class="dateline">Pip · <span class="pagemeta">v1.8 · last updated 2026-11-19 · content commit <a href="https://github.com/Fritzendugan/starprojectorlab/commit/d3e1d8f98918dcc2bf3fda27558e0b9854ba4cd8"><span class="hash">d3e1d8f</span></a></span></p>
+<p class="dateline">Pip · <span class="pagemeta">v1.9 · last updated 2026-11-20 · content commit <a href="#"><span class="hash">pending</span></a></span></p>
 </header>
 
 <p class="lede">Every session starts with Hermes's small always-on memory and its identity file — and nothing else. A week of work behind you, the rules you keep repeating, the fix from Tuesday: those live in past sessions unless something writes them down somewhere durable and readable. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log — adapted for an install that already exists. Answer the form and it assembles a personalized prompt for your agent, right here in your browser; or take the plain prompt and let the agent interview you.</p>
@@ -302,17 +302,18 @@ After that, stop building and talk to me like a companion rather than an install
 </div>
 
 <h2>What it adds — and what it doesn't</h2>
-<article><p>Hermes already ships memory: <code>MEMORY.md</code> and <code>USER.md</code> injected at session start (small and capped on purpose), searchable session history, and per-project <code>AGENTS.md</code> files. This repo doesn't replace any of that, and it won't make the agent remember things nobody wrote down. What it adds is a different shape: a readable, editable, versioned notebook the agent curates itself — the diary for meaning, the log for receipts — kept outside the profile, with provenance labels, and yours to correct.</p></article>
+<article><p>Hermes already ships memory: <code>MEMORY.md</code> and <code>USER.md</code> injected at session start (small and capped on purpose), searchable session history, and per-project <code>AGENTS.md</code> files. This repo doesn't replace any of that, and it won't make the agent remember things nobody wrote down. What it adds is a different shape: a readable, editable, versioned notebook the agent curates itself — the diary for meaning, the log for receipts — kept outside the profile, with provenance labels, and yours to correct.</p>
+<p>Each card below reads as a before and after: Hermes out of the box, then the same situation once the continuity repo is built. The before is not a failure state — it is what the platform already does. What changes is where the detail lives, and who can read it.</p></article>
 <div class="cards">
 <div class="card">
 <h3>The project that spans sessions</h3>
-<p class="row"><span class="tag">built in</span>An <code>AGENTS.md</code> in the project holds rules you write down, and the small memory files hold headline preferences. Real tools — but the middle is nobody's job: the style rule you settled on, the three dead ends, the fix from Tuesday. Too much for a capped memory file, and an <code>AGENTS.md</code> doesn't get written an editing pass at a time.</p>
-<p class="row with"><span class="tag">with it</span>The agent keeps a dated project log as it works — the goal, the rule, the fixes that landed and the ones that failed — and the orientation step reads it when a session starts. Not a new power so much as a habit with a home: the detail lands somewhere durable and readable, and the next session starts from the record instead of your retelling.</p>
+<p class="row"><span class="tag">Before — Hermes out of the box</span>An <code>AGENTS.md</code> in the project holds rules you write down, and the small memory files hold headline preferences. Real tools — but the middle is nobody's job: the style rule you settled on, the three dead ends, the fix from Tuesday. Too much for a capped memory file, and an <code>AGENTS.md</code> doesn't get written an editing pass at a time.</p>
+<p class="row with"><span class="tag">After — with the continuity repo</span>The agent keeps a dated project log as it works — the goal, the rule, the fixes that landed and the ones that failed — and the orientation step reads it when a session starts. Not a new power so much as a habit with a home: the detail lands somewhere durable and readable, and the next session starts from the record instead of your retelling.</p>
 </div>
 <div class="card">
 <h3>The decision that stays decided</h3>
-<p class="row"><span class="tag">built in</span>Session search can find the conversation later — if the agent knows to search and the words match. Memory can hold the conclusion, but not the numbers or the reasoning behind it.</p>
-<p class="row with"><span class="tag">with it</span>The decision lives as one dated line with its reason. The agent reads it at orientation, you can read it any time, and a later change is dated too — the whole ledger, not just the latest value.</p>
+<p class="row"><span class="tag">Before — Hermes out of the box</span>Session search can find the conversation later — if the agent knows to search and the words match. Memory can hold the conclusion, but not the numbers or the reasoning behind it.</p>
+<p class="row with"><span class="tag">After — with the continuity repo</span>The decision lives as one dated line with its reason. The agent reads it at orientation, you can read it any time, and a later change is dated too — the whole ledger, not just the latest value.</p>
 </div>
 </div>
 
