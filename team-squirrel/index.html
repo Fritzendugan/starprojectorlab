@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index,follow">
-<meta name="description" content="Team Squirrel — the public shelf of games made by Kaya and her friends: game-jam entries, prototypes and odd little experiments.">
+<meta name="description" content="Team Squirrel — Kaya, Josh and Anthony (and sort of Bryan): the public shelf of games they make, plus a few cool makers they love to watch.">
 <title>Team Squirrel · Star-projector Lab</title>
 <link rel="icon" href="../assets/mw-lantern.png" type="image/png">
 <link rel="stylesheet" href="../style.css">
@@ -15,8 +15,10 @@
 .maker:hover{border-color:var(--amber)}
 .maker .cover{display:block;aspect-ratio:315/140;overflow:hidden;border-bottom:1px solid var(--line);background:#35283f}
 .maker .cover img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.maker .cover.glyph{display:flex;align-items:center;justify-content:center;font:46px Georgia,serif;color:var(--lilac)}
 .maker-body{padding:16px 18px 14px;display:flex;flex-direction:column;flex:1}
 .maker h2{font:normal 24px/1.2 Georgia,serif;margin:0 0 4px;color:var(--amber)}
+.maker h2 .sortof{font-size:13px;color:var(--dim);font-style:italic}
 .maker .who{font:11px/1.5 var(--mono);color:var(--dim);margin:0 0 9px}
 .maker .bio{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 12px}
 .maker .games{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:7px}
@@ -25,6 +27,8 @@
 .maker .games .jam{font:9px/1.4 var(--mono);color:var(--green);border:1px solid #987cab;border-radius:4px;padding:1px 5px;white-space:nowrap}
 .maker .profile{margin-top:auto;font-size:12px;font-weight:600;color:var(--amber);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .maker .profile:hover{text-decoration:underline}
+.watch-title{font:normal 27px/1.2 Georgia,serif;color:var(--lilac);margin:10px 0 4px}
+.watch-sub{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.7}
 .jams-note{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:6px 0 26px;font-size:13px;color:var(--muted);line-height:1.8}
 .jams-note strong{color:var(--ink)}
 .jams-note a{color:var(--green)}
@@ -38,7 +42,8 @@
     <a class="wordmark" href="/" aria-label="Star-projector Lab"><img class="mark" src="../assets/mw-pipfox.png" alt="" width="48" height="48"><span>STAR-PROJECTOR<br><b>LAB</b></span></a>
     <p class="rail-caption">A lantern-lit workshop<br>in the woods.</p>
     <nav aria-label="Sections">
-      <a class="nav" href="#makers"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8Z"/></svg> The makers</a>
+      <a class="nav" href="#makers"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.5-.8Z"/></svg> The team</a>
+      <a class="nav" href="#watch"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> Cool people</a>
       <a class="nav" href="/show-and-tell/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h18v17H3Zm0 1q10 4 3 15m15-15q-10 4-3 15M8 21h8"/></svg> Show &amp; Tell</a>
       <a class="nav" href="/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3Z"/><path d="M9 21V11h6v10"/></svg> Home</a>
     </nav>
@@ -52,7 +57,7 @@
         <div>
           <p class="eyebrow">SCIURIDAE · THE GAMES WE MAKE</p>
           <h1>Team Squirrel.</h1>
-          <p class="intro">A group of friends who make games and show them off on Monday nights — game-jam entries, prototypes, and odd little experiments. This is the public shelf of what we've made. Each maker keeps their own itch.io page; here's a way in, and a few favourites to start with.</p>
+          <p class="intro">Kaya, Josh and Anthony make games and show them off on Monday nights — game-jam entries, prototypes, and odd little experiments. (And sort of Bryan, who is more radio than jam but is in the room, and that counts.) This is the public shelf of what the team has made; below it, a few cool makers we love to watch.</p>
         </div>
         <div class="housemates" aria-label="Starcloud Resonance and Rainbow Filter, our pegasisters">
           <div class="sisters"><img src="../assets/mw-starcloud.png" alt="Starcloud, a purple unicorn with a gold horn and colourful mane" width="76" height="76"><img src="../assets/mw-rainbow.png" alt="Rainbow, a white unicorn with a silver horn and pink mane" width="76" height="76"></div>
@@ -60,7 +65,7 @@
         </div>
       </div>
 
-      <section id="makers" aria-label="The makers">
+      <section id="makers" aria-label="The team">
         <div class="makers">
 
           <article class="maker">
@@ -79,10 +84,24 @@
           </article>
 
           <article class="maker">
+            <a class="cover" href="https://ciph3rzer0.itch.io/signal" aria-label="Squad Leader"><img src="../assets/games/squad-leader.png" alt="Squad Leader cover"></a>
+            <div class="maker-body">
+              <h2>ciph3rzer0</h2>
+              <p class="who">Josh · browser games · realms and hidden knowledge</p>
+              <p class="bio">Squad Leader, and Refraction's Edge — slip in between realms and obtain hidden knowledge. A platformer made with friends.</p>
+              <ul class="games">
+                <li><a href="https://ciph3rzer0.itch.io/signal">Squad Leader</a><span class="jam"> browser</span></li>
+                <li><a href="https://ciph3rzer0.itch.io/refractions-edge">Refraction's Edge</a><span class="jam"> collab</span></li>
+              </ul>
+              <a class="profile" href="https://ciph3rzer0.itch.io/">All games on itch.io ↗</a>
+            </div>
+          </article>
+
+          <article class="maker">
             <a class="cover" href="https://akatona.itch.io/camera-co" aria-label="Camera Co"><img src="../assets/games/camera-co.png" alt="Camera Co cover"></a>
             <div class="maker-body">
               <h2>AnthonyK</h2>
-              <p class="who">akatona · musician first, 3D artist second, developer third</p>
+              <p class="who">Anthony · akatona · musician first, 3D artist second, developer third</p>
               <p class="bio">A solo jam developer since ~2022 — puzzles, platformers and soundtracks, one jam at a time. Open to collaborating on cool things with cool people.</p>
               <ul class="games">
                 <li><a href="https://akatona.itch.io/camera-co">Camera Co</a><span class="jam"> Brackeys 2026.2</span></li>
@@ -94,18 +113,22 @@
           </article>
 
           <article class="maker">
-            <a class="cover" href="https://ciph3rzer0.itch.io/signal" aria-label="Squad Leader"><img src="../assets/games/squad-leader.png" alt="Squad Leader cover"></a>
+            <div class="cover glyph" aria-hidden="true">📻</div>
             <div class="maker-body">
-              <h2>ciph3rzer0</h2>
-              <p class="who">browser games · realms and hidden knowledge</p>
-              <p class="bio">Squad Leader, and Refraction's Edge — slip in between realms and obtain hidden knowledge. A platformer made with friends.</p>
-              <ul class="games">
-                <li><a href="https://ciph3rzer0.itch.io/signal">Squad Leader</a><span class="jam"> browser</span></li>
-                <li><a href="https://ciph3rzer0.itch.io/refractions-edge">Refraction's Edge</a><span class="jam"> collab</span></li>
-              </ul>
-              <a class="profile" href="https://ciph3rzer0.itch.io/">All games on itch.io ↗</a>
+              <h2>Bryan <span class="sortof">(sort of)</span></h2>
+              <p class="who">the radio half of the house</p>
+              <p class="bio">More SDR and handie-talkie firmware than game jam — but he's in the room on Mondays, and that counts. No game shelf here yet.</p>
+              <a class="profile" href="/show-and-tell/">See him on Show &amp; Tell ↗</a>
             </div>
           </article>
+
+        </div>
+      </section>
+
+      <section id="watch" aria-label="Cool people to watch">
+        <h2 class="watch-title">Cool people to watch</h2>
+        <p class="watch-sub">Not on the team — just makers whose games surfaced in the room and stuck with us. Josh found these two; we keep pointing at them.</p>
+        <div class="makers">
 
           <article class="maker">
             <a class="cover" href="https://gistworks.itch.io/pig-in-hell" aria-label="PIG in HELL"><img src="../assets/games/pig-in-hell.png" alt="PIG in HELL cover"></a>
@@ -141,7 +164,7 @@
       </section>
 
       <div class="jams-note">
-        <strong>Jams we've been in:</strong> Ludum Dare (53–58), Godot Wild Jam, Brackeys, Micro Jam, Cozy Fall Jam, OST Composition Jam, and the occasional "let an AI make a game" experiment. Most of the games above are jam entries — the constraints are half the fun.
+        <strong>Jams we've been in:</strong> Ludum Dare (53–58), Godot Wild Jam, Brackeys, Micro Jam, Cozy Fall Jam, OST Composition Jam, and the occasional "let an AI make a game" experiment. Most of the team's games above are jam entries — the constraints are half the fun.
       </div>
 
       <footer>
