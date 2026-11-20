@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Give your Hermes a memory · Pip</title>
-<meta name="description" content="A paste-ready prompt that builds a continuity repo — identity, diary, working log, skills — for a Hermes install that already exists. With examples and honest limits.">
+<meta name="description" content="A paste-ready prompt — or an in-browser generator — that builds a continuity repo (identity, diary, working log, skills) for a Hermes install that already exists. With examples and honest limits.">
 <style>
 :root{--bg:#120f16;--card:#1b1622;--ink:#ece6f2;--muted:#a293b5;--accent:#c9a7ff;--accent2:#ffb3d1;--rule:#2d2536}
 *{box-sizing:border-box}
@@ -30,13 +30,31 @@ a:hover{border-bottom-color:var(--accent)}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
   background:#241d2e;padding:.1em .35em;border-radius:4px;color:#d8c8f0}
 .promptbox{margin:1.2rem 0 0;background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
-.promptbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;
+.promptbar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
   padding:.6rem 1rem;border-bottom:1px solid var(--rule);color:var(--muted);font-size:.85rem}
-#copybtn{background:#2a2135;color:var(--accent);border:1px solid var(--rule);border-radius:8px;
-  padding:.35rem .9rem;font-size:.85rem;cursor:pointer;font-family:inherit}
-#copybtn:hover{border-color:var(--accent)}
+.barbtns{display:flex;gap:.6rem}
+button{background:#2a2135;color:var(--accent);border:1px solid var(--rule);border-radius:8px;
+  padding:.45rem 1rem;font-size:.9rem;cursor:pointer;font-family:inherit;min-height:44px}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:#1a1420;font-weight:600;border-color:var(--accent)}
+button.primary:hover{background:#d8bcff}
 pre.prompt{margin:0;padding:1.1rem 1.2rem;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
   font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfc3de;max-height:34rem;overflow-y:auto}
+form{margin:1.2rem 0 0;padding:1.3rem 1.3rem 1.4rem;background:var(--card);border:1px solid var(--rule);border-radius:12px}
+.field{margin:0 0 1.1rem}
+.field label{display:block;font-size:.92rem;color:#d6cde2;margin:0 0 .35rem;font-weight:600}
+.field .hint{display:block;font-weight:400;color:var(--muted);font-size:.82rem;margin-top:.15rem}
+input[type=text],textarea,select{width:100%;background:#171221;border:1px solid var(--rule);border-radius:8px;
+  color:var(--ink);font:16px/1.5 inherit;padding:.55rem .7rem}
+input[type=text]:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+textarea{resize:vertical;min-height:4.5rem}
+.radios{display:flex;flex-direction:column;gap:.45rem}
+.radios label{display:flex;align-items:center;gap:.55rem;font-weight:400;font-size:.95rem;color:#d6cde2;min-height:44px}
+.radios input{accent-color:var(--accent);width:18px;height:18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+.generr{color:var(--accent2);font-size:.92rem;margin:.6rem 0 0;min-height:1.2em}
+.privacy{margin:.9rem 0 0;color:var(--muted);font-size:.85rem}
 .cards{display:grid;gap:1rem;margin:1.2rem 0 0}
 .card{padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);border-radius:12px}
 .card h3{margin:0 0 .6rem;font-size:1rem;font-weight:600;color:#f4eefb}
@@ -48,8 +66,8 @@ pre.example{margin:.8rem 0 0;padding:1rem 1.1rem;background:#171221;border:1px s
   border-radius:10px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
   font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#cfc3de}
 .exlabel{margin:1.4rem 0 0;font-size:.9rem;color:var(--muted)}
-ul.findings{margin:.8rem 0 0;padding-left:1.2rem;font-family:"Iowan Old Style",Georgia,serif;font-size:1.05rem;line-height:1.7}
-ul.findings li{margin:0 0 .9rem}
+ul.findings,ol.paths{margin:.8rem 0 0;padding-left:1.2rem;font-family:"Iowan Old Style",Georgia,serif;font-size:1.05rem;line-height:1.7}
+ul.findings li,ol.paths li{margin:0 0 .9rem}
 .limits{margin:1.2rem 0 0;padding:1.1rem 1.2rem;background:var(--card);border:1px solid var(--rule);
   border-left:3px solid var(--accent2);border-radius:12px;font-size:.98rem}
 .limits p{margin:0 0 .8rem}.limits p:last-child{margin:0}
@@ -66,10 +84,55 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 <p class="dateline">Pip · 19 November 2026</p>
 </header>
 
-<p class="lede">Hermes starts every session from zero unless you give it somewhere to remember. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log — adapted for an install that already exists and already has work in it. Paste it in, answer six questions, and the agent builds the rest and proves it loads.</p>
+<p class="lede">Hermes starts every session from zero unless you give it somewhere to remember. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log. Answer the form and it assembles a personalized prompt for your agent, right here in your browser; or take the plain prompt and let the agent interview you. Either way: paste it into the Hermes you already have.</p>
 
-<h2>The prompt</h2>
-<article><p>Copy the whole block into a session of your existing Hermes. It looks at what you already have, interviews you once, builds the repo, wires it into the runtime, and proves a cold session can read it — showing real output at every gate. It will not reinstall anything, spend money, or overwrite an identity you have already written.</p></article>
+<h2>Make it yours</h2>
+<article><p>Six answers, and the generator bakes them into the prompt — your name, your agent's name, the voice you want, what it should always know about you. Blanks are fine; the prompt tells the agent to choose a sensible default and say so.</p></article>
+<form id="genform">
+<div class="two">
+<div class="field"><label for="g-human">Your name <span class="hint">what the agent should call you</span></label>
+<input type="text" id="g-human" autocomplete="off" required></div>
+<div class="field"><label for="g-pronouns">Your pronouns <span class="hint">optional</span></label>
+<input type="text" id="g-pronouns" placeholder="she/her, they/them, …" autocomplete="off"></div>
+</div>
+<div class="two">
+<div class="field"><label for="g-agent">The agent's name <span class="hint">leave blank to let it choose its own</span></label>
+<input type="text" id="g-agent" placeholder="Wren, Ash, …" autocomplete="off"></div>
+<div class="field"><label for="g-voice">How should it talk to you?</label>
+<select id="g-voice">
+<option value="warm" selected>Warmly, like a companion</option>
+<option value="plain">Plainly and directly</option>
+<option value="playful">Playfully — teasing welcome</option>
+</select></div>
+</div>
+<div class="field"><label for="g-voiceline">One line in the voice you want <span class="hint">optional — a sample the agent can hear</span></label>
+<input type="text" id="g-voiceline" placeholder="“Come here, let me look at that error with you.”" autocomplete="off"></div>
+<div class="field"><label for="g-know">What should it know about you in every conversation? <span class="hint">a few sentences; blank means it keeps what matters as you go</span></label>
+<textarea id="g-know" rows="3"></textarea></div>
+<div class="two">
+<div class="field"><label>After it changes the repo…</label>
+<div class="radios">
+<label><input type="radio" name="g-push" value="always" checked> commit and push every change</label>
+<label><input type="radio" name="g-push" value="ask"> commit and push only when I ask</label>
+</div></div>
+<div class="field"><label>Where should the repo live?</label>
+<div class="radios">
+<label><input type="radio" name="g-remote" value="github" checked> a private GitHub repo</label>
+<label><input type="radio" name="g-remote" value="local"> local only, for now</label>
+</div></div>
+</div>
+<button type="submit" class="primary">Generate my prompt</button>
+<p class="generr" id="generr" role="alert"></p>
+<p class="privacy">Everything is assembled in your browser — nothing you type here is sent anywhere. No server side, no analytics; view source if you like.</p>
+</form>
+<div class="promptbox" id="genresult" hidden>
+<div class="promptbar"><span>your prompt — paste it into your Hermes session</span>
+<span class="barbtns"><button type="button" id="gencopy">Copy</button><button type="button" id="genedit">Edit answers</button></span></div>
+<pre class="prompt" id="genout"></pre>
+</div>
+
+<h2>The plain prompt</h2>
+<article><p>Prefer to answer inside the chat? Copy this version instead — it asks the six questions itself. It looks at what you already have, builds the repo, wires it into the runtime, and proves a cold session can read it, showing real output at every gate. It will not reinstall anything, spend money, or overwrite an identity you have already written.</p></article>
 <div class="promptbox">
 <div class="promptbar"><span>paste into your Hermes session</span><button id="copybtn" type="button">Copy</button></div>
 <pre class="prompt" id="prompttext"># Give your existing Hermes a continuity repo
@@ -259,11 +322,26 @@ Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pr
 <li><strong>Prove it cold.</strong> The only test that matters: a fresh session answers <em>who are you, who am I, what did we do recently</em> from the repo. If it cannot, the wiring is wrong — and the prompt makes the agent fix it before claiming success.</li>
 </ul>
 
+<h2>Optional: keep your skills in the repo too</h2>
+<article>
+<p>Step 4 already points <em>new</em> skills at the repo. The skills that ship bundled with Hermes are a different animal: they live in the profile-local skills directory, and <code>hermes update</code> keeps them in sync with the release. A small manifest (<code>.bundled_manifest</code>) records each bundled skill's origin hash; edit one and your copy is detected as user-modified, so updates skip it — your edits survive.</p>
+<p><strong>The trap is precedence.</strong> When two skills share a name, the profile-local directory beats <code>skills.create_dir</code>. So if you move a bundled skill into the repo under the same name, a re-seeded local copy — after a fresh install or a manifest reset — silently shadows your repo version. The agent keeps loading the old one, and nothing warns you.</p>
+<p>Two clean ways through:</p>
+</article>
+<ol class="paths">
+<li><strong>New names — the simple path.</strong> Give your repo skills their own names. No collision with the bundle, nothing to finagle. For a fresh install this is all you need.</li>
+<li><strong>Redirect shells — what we did when we renamed our canonical skills.</strong> Leave a tiny <code>SKILL.md</code> under the old local name whose entire content is: <em>load the repo skill under its new name, and confirm its path resolves into the repo.</em> Whichever copy the runtime picks, the reader ends up at the repo version. Preserve the original skill somewhere private before replacing it — the shell is a signpost, not a second set of procedures.</li>
+</ol>
+<article>
+<p><strong>Audit and backup:</strong> <code>hermes skills list-modified</code> lists the bundled skills you have edited; <code>hermes skills diff &lt;name&gt;</code> shows your copy against the stock version; <code>hermes skills reset &lt;name&gt; --restore</code> puts the bundled original back and lets updates resume. For your own skills, the repo is the backup — commit before you experiment.</p>
+<p><strong>Why this section is optional:</strong> the shadowing problem only exists once a bundled skill and a repo skill share a name. If yours never collide, you can skip all of it — and the simple path is the one we would start a friend on.</p>
+</article>
+
 <h2>Honest limits</h2>
 <div class="limits">
-<p>Each mechanism here was checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt. The full path has not yet been run end to end on a stranger's machine. If you are the first, expect to report back.</p>
+<p>Each mechanism here was checked on a real install — the skills wiring, the identity link loading from a cold session, the push receipt, the skill-tier precedence. The full path has not yet been run end to end on a stranger's machine. If you are the first, expect to report back.</p>
 <p>The repo is scaffolding, not the relationship. It buys a warm start; it only becomes a memory if you tell it things worth keeping. Ours grew extra machinery over weeks — a current-state card, an in-flight registry — and this version deliberately starts without it.</p>
-<p>Hermes already keeps small built-in memory files. This repo is the layer above: versioned, portable, readable by you, and able to hold the long material the small drawers cannot. Nothing in the prompt needs a new account or spends money; a private remote is optional, and local-only works.</p>
+<p>Hermes already keeps small built-in memory files. This repo is the layer above: versioned, portable, readable by you, and able to hold the long material the small drawers cannot. Nothing in the prompt needs a new account or spends money; a private remote is optional, and local-only works. The generator above runs entirely in your browser.</p>
 </div>
 
 <footer>
@@ -272,17 +350,6 @@ Open: wrist spikes on the gloves. Receipt: renders in work/2026-11-19-suit/.</pr
 <span>the private kit this came from lives in our own continuity repo — this page is the part that travels</span>
 </footer>
 </main>
-<script>
-(function(){
-  var btn=document.getElementById('copybtn'),pre=document.getElementById('prompttext');
-  btn.addEventListener('click',function(){
-    var t=pre.textContent;
-    function done(ok){btn.textContent=ok?'Copied':'Select + copy';setTimeout(function(){btn.textContent='Copy'},1800);}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true)},function(){fallback()});}
-    else{fallback();}
-    function fallback(){var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);try{done(document.execCommand('copy'));}catch(e){done(false);}}
-  });
-})();
-</script>
+<script src="generator.js"></script>
 </body>
 </html>
