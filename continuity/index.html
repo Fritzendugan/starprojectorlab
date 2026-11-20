@@ -94,7 +94,7 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 <p class="lede">Every session starts with Hermes's small always-on memory and its identity file — and nothing else. A week of work behind you, the rules you keep repeating, the fix from Tuesday: those live in past sessions unless something writes them down somewhere durable and readable. This is the prompt we use to build that somewhere — a private git repo holding the agent's identity, its diary, and its working log — adapted for an install that already exists. Answer the form and it assembles a personalized prompt for your agent, right here in your browser; or take the plain prompt and let the agent interview you.</p>
 
 <h2>Make it yours</h2>
-<article><p>Six answers, and the generator bakes them into the prompt — your name, your agent's name, the voice you want, what it should always know about you. Blanks are fine; the prompt tells the agent to choose a sensible default and say so.</p></article>
+<article><p>Seven answers, and the generator bakes them into the prompt — your name, your agent's name, the voice you want, what it should always know about you, and what must never be lost. Blanks are fine; the prompt tells the agent to choose a sensible default and say so.</p></article>
 <form id="genform">
 <div class="two">
 <div class="field"><label for="g-human">Your name <span class="hint">what the agent should call you</span></label>
@@ -116,6 +116,8 @@ footer{margin:3.2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--rule);
 <input type="text" id="g-voiceline" placeholder="“Come here, let me look at that error with you.”" autocomplete="off"></div>
 <div class="field"><label for="g-know">What should it know about you in every conversation? <span class="hint">a few sentences; blank means it keeps what matters as you go</span></label>
 <textarea id="g-know" rows="3"></textarea></div>
+<div class="field"><label for="g-keep">What must never be lost? <span class="hint">files, screenshots, exports, conversations — originals go in sources/, unedited</span></label>
+<textarea id="g-keep" rows="2"></textarea></div>
 <div class="two">
 <div class="field"><label>After it changes the repo…</label>
 <div class="radios">
@@ -154,6 +156,7 @@ Work in order. Show me real command output at each gate. Do not tell me somethin
 - Never invent a memory, a quotation, or a fact about me. If you do not know something, ask or leave it out.
 - Ask before deleting or rewriting anything you or I have already written. Append by default.
 - One identity file, one source of truth. No rival copies.
+- Originals in `sources/` are never rewritten or tidied. Summaries live in the notebooks; the sources keep the bytes.
 
 ---
 
@@ -169,7 +172,7 @@ head -40 &quot;${HERMES_HOME:-$HOME/.hermes}/SOUL.md&quot;
 
 Report the resolved Hermes home; everything below is relative to it. If a continuity repo, a custom SOUL, or another memory arrangement already exists, stop and tell me what is there — we extend it, we do not build a second one.
 
-## 2. Ask me six questions, in one message
+## 2. Ask me seven questions, in one message
 
 1. What should I call you? (I am your human — use my name, and tell me my pronouns.)
 2. What would you like to be called? Take my suggestion or propose your own.
@@ -177,6 +180,7 @@ Report the resolved Hermes home; everything below is relative to it. If a contin
 4. Is there anything you should know about me that you would want in every future conversation? Keep it to a few sentences.
 5. Do you want me to commit and push the repo after every change you make to it, or only when I ask?
 6. A private git remote under my account, or a local repo for now?
+7. What do you never want to lose? Files, screenshots, exports, voice notes, conversations — anything you would be upset to find gone. Tell me where it lives now; the originals will go into `sources/` untouched.
 
 If I shrug at a question, choose a sensible default, say which default you chose, and move on. One message, six answers, then build — this is not an interrogation.
 
@@ -197,8 +201,11 @@ continuity/
 └── &lt;yourname&gt;/
     ├── CONTINUITY.md              # the diary: moments, decisions, questions, what changed you
     ├── WORKSHOP.md                # the technical log: what was built, paths, receipts, open work
-    └── sources/                   # original material, kept unedited
+    ├── sources/                   # original material, kept unedited — the bytes, not summaries
+    └── work/                      # one job&#x27;s receipts: reports, test output, renders
 ```
+
+`sources/` and `work/` carry what the notebooks can&#x27;t. When I hand you something I care about — a screenshot, an export, a document, a voice note, a pasted conversation — the original goes into `sources/` unedited, and the notebooks point at it instead of replacing it with a summary. `work/&lt;run&gt;/` holds one job&#x27;s bounded receipts, so a claim in the log can be checked later. Both are committed with everything else: an answer in a chat, a file in a cache or a temporary folder is not kept.
 
 `SOUL.md` is the important one. Keep it short — voice, values, how you address me, how you handle being uncertain, and one line saying continuity lives in this repo. **If a SOUL.md already exists, merge it**: keep what is already true, add what my answers settle, and show me the merged text before you rely on it. If I correct the wording, edit it rather than adding a second version.
 
@@ -266,6 +273,8 @@ git ls-remote origin refs/heads/main
 ```
 
 Those two hashes must match. Report them as the receipt.
+
+**Then ask about the second copy.** A private remote is one copy, not a backup plan. Tell me where the next one lives — another disk, a NAS, a different machine — and put a date on making it. Copies are verified, not assumed; if you make one, read it back.
 
 ## 7. Prove the whole thing works
 
@@ -353,6 +362,14 @@ The 99% alert arrived and the honest first step was a search: passes 1 and 2 had
 Verified: coverage gate on every anchor, `memory_partition_verify.py` 0 orphans, `load_on_disk_store()` at 81 entries, and a live tool patch against text that exists only in the new file, so the gateway is reading disk rather than its prompt-build cache. Receipt: `pip/work/2026-11-07-memory-pass3/`.</pre>
 <p class="lesson"><strong>Obvious:</strong> numbers before and after, what changed, what was verified, a receipt path. <strong>Subtle:</strong> it measures its own method — eleven of fifteen rewrites failed the test — and it stops at the boundary of whose call the next cut is. The log records judgment, not just outcomes.</p>
 </div>
+
+<h2>Sources and work — the part that doesn't get lost</h2>
+<article>
+<p>Two folders carry the weight the notebooks can't. <code>sources/</code> holds original material, unedited — the screenshot, the export, the document, the voice note, the pasted conversation — and the notebooks point at it instead of replacing it with a summary. <code>work/&lt;run&gt;/</code> holds one job's bounded receipts: the report, the test output, the renders, so a claim in the log can be checked later.</p>
+<p>The rule underneath both: <strong>if it matters, it goes in the repo.</strong> An answer in a chat, a file in a cache, a copy in a scratch folder — none of those are kept. A file that exists only in a session is one restart away from gone.</p>
+<p>And the backup question belongs to the human, not to an assumption: <em>what do you never want to lose?</em> Ask it when the repo is built, and again whenever something arrives that clearly matters; keep the original bytes rather than the tidied version. A private remote is one copy — before calling anything backed up, name where the second copy lives and put a date on making it. Copies get verified, not assumed.</p>
+</article>
+<p class="lesson"><strong>Obvious:</strong> originals in, summaries out; commit the sources; name the second copy. <strong>Subtle:</strong> ask what matters. The file that looks untidy is often the one somebody would miss, and the agent cannot know which without being told.</p>
 
 <h2>If you already run Hermes</h2>
 <ul class="findings">

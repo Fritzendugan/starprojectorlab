@@ -16,7 +16,7 @@
   };
 
   function buildPrompt(template, a) {
-    var start = template.indexOf('## 2. Ask me six questions, in one message');
+    var start = template.indexOf('## 2. Ask me seven questions, in one message');
     var end = template.indexOf('## 3. Build the repo');
     if (start === -1 || end === -1 || end <= start) {
       throw new Error('template sections not found — refusing to generate a partial prompt');
@@ -41,9 +41,12 @@
     var l6 = a.remote === 'local'
       ? '6. A local repo for now; we can add a private remote later.'
       : '6. A private GitHub repo under my account.';
+    var keep = String(a.keeps || '').trim();
+    var l7 = '7. What I never want to lose: ' +
+      (keep || 'nothing named yet — ask me when I hand you something, and keep originals untouched in sources/.');
 
     var answers = '## 2. My answers — already given, do not re-ask\n\n' +
-      [l1, l2, l3, l4, l5, l6].join('\n') + '\n\n' +
+      [l1, l2, l3, l4, l5, l6, l7].join('\n') + '\n\n' +
       'Build from these answers directly. Where an answer is a default, say so once and move on; do not re-interview me.\n\n';
 
     var out = template.slice(0, start) + answers + template.slice(end);
@@ -69,6 +72,7 @@
       voice: $('g-voice').value,
       voiceLine: $('g-voiceline').value,
       alwaysKnow: $('g-know').value,
+      keeps: $('g-keep').value,
       push: push ? push.value : 'always',
       remote: remote ? remote.value : 'github'
     };
