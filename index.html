@@ -60,13 +60,12 @@
 .card:hover .open-link{text-shadow:0 0 12px currentColor}
 .grid.single{grid-template-columns:repeat(2,minmax(0,1fr))}
 .title-link:hover{text-shadow:0 0 10px rgba(201,167,255,.7)}
-/* The homepage has one featured piece; /writing-desk/ keeps the full shelf. */
-.writing-feature{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:17px;align-items:center;max-width:900px}
-.writing-feature .preview{max-height:170px}
-.writing-feature .writing-all{display:inline-flex;align-items:center;gap:10px;justify-self:start;
-  min-height:44px;padding:8px 14px;font-size:12px;text-decoration:none}
-.writing-all:hover{border-color:var(--amber);background:var(--raised);text-decoration:underline}
-@media(max-width:600px){.writing-feature{grid-template-columns:1fr;gap:13px}}
+/* Share the Night notes card layout, with the Writing desk's own colours. */
+#room-writing{--room-color:var(--amber)}
+#room-writing .preview{background:#35283f}
+.writing-all{display:inline-flex;align-items:center;align-self:start;justify-self:start;min-height:44px;margin-top:5px;text-decoration:none}
+.writing-all:hover .badge{border-color:var(--amber);text-decoration:underline}
+@media(max-width:1150px){.writing-all{justify-self:end;margin-top:0}}
 /* Elsewhere in the workshop */
 .elsewhere{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:6px 0 8px}
 .elsewhere a{display:block;padding:15px 17px;background:var(--surface);border:1px solid var(--line);border-radius:12px;
@@ -116,9 +115,9 @@
         <p class="sister-note">The pegasisters saved you a spot.</p>
       </div>
 
-      <section class="room room-public" id="room-writing" aria-label="The writing desk">
+      <section class="room room-media" id="room-writing" aria-label="The writing desk">
         <div class="room-heading"><img src="assets/mw-foxtail.png" alt=""><div><h2>The writing desk</h2><p>Essays and explainers, written to be read.</p></div><span class="room-count">Featured</span></div>
-        <div class="writing-feature">
+        <div class="grid">
           <!-- Swap this card to rotate the feature; keep every piece in the directory. -->
           <article class="card">
             <a class="preview" href="/continuity/" aria-label="Give your Hermes a notebook"><span class="fallback">❦</span><span class="preview-caption">explainer</span></a>
@@ -129,7 +128,7 @@
               <div class="card-actions"><a class="open-link" href="/continuity/">Read the explainer ↗</a></div>
             </div>
           </article>
-          <a class="badge public writing-all" href="/writing-desk/">View the rest of the writing desk <span aria-hidden="true">→</span></a>
+          <a class="writing-all" href="/writing-desk/"><span class="badge public">View the rest of the writing desk <span aria-hidden="true">→</span></span></a>
         </div>
       </section>
 
