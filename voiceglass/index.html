@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' data:; style-src 'unsafe-inline'; worker-src data:; connect-src data:; img-src data:; base-uri 'none'; form-action 'none'"><title>Voiceglass · Star-projector Lab</title><style>
+:root{color-scheme:dark;--bg:#141119;--panel:#211b27;--well:#16111c;--line:#4a3e50;--mut:#c5b8ca;--txt:#f4edf3;--lil:#dfbadf;--gold:#ffd890;--aqua:#99e0d2}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 'Segoe UI',Optima,Arial,sans-serif}main{max-width:1260px;margin:auto;padding:21px clamp(12px,3vw,42px) 40px}header,.bar,.caption,.split,.btns{display:flex;align-items:center;gap:9px;flex-wrap:wrap}header,.split{justify-content:space-between}header{padding-bottom:14px;border-bottom:1px solid var(--line)}h1,h2,h3,p{margin:0}h1{font:normal clamp(31px,4vw,48px)/1.1 Georgia,serif;letter-spacing:-.05em}h2{font:normal 24px/1.2 Georgia,serif}h3{font-size:16px}.ey,.badge,.mono,output,td{font-family:ui-monospace,Consolas,'Liberation Mono',monospace;font-variant-numeric:tabular-nums}.ey,.badge{font-size:11px;letter-spacing:.115em;text-transform:uppercase;color:var(--lil)}.badge{padding:5px 9px;border:1px solid var(--line);border-radius:4px;color:var(--mut);letter-spacing:.05em}.badge.on{background:#234038;color:#bbf2d7;border-color:#618e77}.bar{padding:14px 0}button,select{font:inherit;font-size:14px;min-height:38px;background:#302735;color:var(--txt);border:1px solid #65566d;border-radius:6px;padding:6px 12px;cursor:pointer}button:hover:not(:disabled),select:hover{border-color:var(--lil)}button.primary{color:#211326;background:var(--lil);border-color:var(--lil);font-weight:650}button:disabled{opacity:.46;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.board{background:var(--panel);border:1px solid var(--line);border-radius:11px;overflow:hidden}.boardHead{padding:14px 16px}.boardHead small,.caption,.sub,.note,.unit,.guide p,footer,p.meta{color:var(--mut)}.boardHead h2{margin:2px 0}.graphwrap{position:relative;background:var(--well)}canvas{display:block;width:100%;height:clamp(258px,32vh,374px);touch-action:pan-y}.caption{padding:9px 16px;border-top:1px solid var(--line);font-size:13px;column-gap:18px}.legend{display:inline-flex;align-items:center;gap:6px}.sw{width:16px;border-top:2px solid var(--aqua)}.dot{border-top:3px dotted var(--gold)}.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.tools label{font-size:12px;color:var(--mut)}.tools select{min-height:34px}.section{margin-top:22px}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(245px,29%);gap:14px;align-items:start}.inspector{padding:14px 16px}.readout{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-top:8px}.readout strong{font-size:13px}.readout output{font-size:17px;color:var(--txt);white-space:nowrap}.rule{border:0;border-top:1px solid var(--line);margin:12px 0}.sub,.note,p.meta{font-size:13px}.note{margin:8px 0;min-height:1.4em}.guide{padding:16px 18px}.guide h2{margin:5px 0 10px}.guide p{margin:6px 0}.guide b{color:var(--txt)}.guide select{max-width:100%}.guided{display:grid;grid-template-columns:2fr 1fr;gap:22px}.labNote{padding:4px 0 4px 19px;border-left:1px solid var(--line)}.inspector .sub{margin:5px 0}.labNote h3{margin:5px 0}.listen{margin-top:12px}.listen .tools{margin-top:9px}.range{accent-color:var(--aqua);width:min(370px,100%);min-height:24px}.pin{padding:12px 14px;flex:1;min-width:180px;background:var(--well);border-radius:6px}.pins{display:flex;flex-wrap:wrap;gap:10px}.pin p{margin:5px 0 10px}.tablewrap{overflow-x:auto}.compare{padding:16px}.compare h2{margin-bottom:5px}.compare .btns{margin:9px 0}.compare .sub{margin:6px 0 10px}table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px;text-align:right}th,td{padding:7px 9px;border-bottom:1px solid var(--line)}th:first-child{text-align:left}thead th{color:var(--mut)}.mono{font-size:13px}.msg{min-height:1.5em;color:var(--gold);margin:2px 0 10px}.mut{color:var(--mut)}.guideBtn{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}details{margin-top:15px}summary{cursor:pointer;font-weight:600;padding:5px 0}ul{margin:6px 0;padding-left:21px}li{margin:6px 0}footer{font-size:12px;margin-top:22px}.hidden{display:none!important}@media(max-width:820px){.layout{grid-template-columns:1fr}.inspector{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 16px}.inspector .readout{flex-wrap:wrap}.inspector .sub,.inspector .rule,.inspector .ey,.inspector .sig{grid-column:1/-1}.guided{grid-template-columns:1fr}.labNote{border:0;padding:0}.guided{gap:12px}}@media(max-width:600px){main{padding:14px 10px 28px}button,select,.tools select{min-height:44px}.boardHead{padding:12px}.guide,.compare{padding:12px}.caption{padding:8px 12px}.pin{min-width:140px}.inspector{gap:4px 9px;padding:12px}.inspector .readout{align-items:start;flex-direction:column}.readout output{font-size:15px}th,td{padding:6px 4px}.boardHead .tools{gap:6px}}
+</style></head><body><main>
+<header><div><div class="ey">Star-projector Lab / acoustic instruments</div><h1>Voiceglass</h1></div><span class="badge" id="micstate">Microphone off</span></header>
+<div class="bar"><button class="primary" id="start">Start microphone</button><button id="stop" disabled>Freeze &amp; release mic</button><button id="play" disabled>Hear this window</button><button id="stopplay" disabled>Stop sound</button></div><div class="msg" role="status" id="msg">Listen first: the second vowel’s bands move up, but its pitch stays put. Press Hear this window.</div>
+<div class="layout"><div class="board"><div class="boardHead split"><div><div class="ey" id="source">Synthetic example · not your voice</div><h2>Sound over time</h2></div><div class="tools"><label>Lens <select id="lens"><option value="narrow">Harmonics</option><option value="wide">Vowel bands</option></select></label><label><input id="overlay" type="checkbox" checked> Band estimates</label></div></div><div class="graphwrap"><canvas id="plot" role="img" aria-label="Scrolling spectrogram, frequency from zero to six kilohertz, with aligned pitch contour from 65 to 500 hertz below. Text measurements appear in the inspector."></canvas></div><div class="caption"><span class="legend"><i class="sw"></i>Pitch contour · own Hz scale</span><span class="legend"><i class="sw dot"></i>F1 / F2 candidates</span><span>Brighter = stronger energy</span></div></div>
+<aside class="board inspector"><div class="ey" id="inspecttitle">At cursor</div><div class="readout"><strong>Pitch · F0</strong><output id="pitch">—</output></div><div class="readout"><strong>Signal level · RMS</strong><output id="level">—</output></div><div class="readout"><strong>Vowel bands¹</strong><output id="bands">—</output></div><div class="readout"><strong>Periodicity²</strong><output id="period">—</output></div><div class="readout"><strong>Upper/lower energy²</strong><output id="bal">—</output></div><p class="sig sub" id="quality">—</p><hr class="rule"><div class="ey">Phrase ending at cursor · up to 3 s</div><div class="readout"><strong>Pitch median</strong><output id="med">—</output></div><div class="readout"><strong>Middle 50% span</strong><output id="iqr">—</output></div><p class="sub">¹ Estimated band centers, not a size reading. ² Clues for listening, not breathiness or weight scores.</p></aside></div>
+<div class="listen"><div class="tools"><label for="cursor">Inspect time</label><input class="range" id="cursor" type="range" min="0" max="0" value="0" step="1" disabled><output class="mono" id="ctime">—</output><span class="sub">When the mic is off, click the plot or use the slider’s arrow keys.</span></div></div>
+<section class="board guide section"><div class="guided"><div><div class="ey">Field guide / change one thing</div><h2>What am I looking for?</h2><div class="guideBtn"><label for="lesson" class="hidden">Choose a lesson</label><select aria-label="Choose a lesson" id="lesson"><option value="pitch">01 · Pitch vs. resonance</option><option value="size" selected>02 · Resonance &amp; apparent size</option><option value="air">03 · Breathiness &amp; noise</option><option value="weight">04 · Weight &amp; harmonic balance</option><option value="prosody">05 · Prosody &amp; phrase endings</option></select><button id="example">Load worked example</button></div><p id="look"></p><p id="try"></p><p id="trap"></p></div><aside class="labNote"><div class="ey">First experiment</div><h3>Same pitch, different vowel bands.</h3><p>Press <b>Hear this window</b>. In the opening example, the mint pitch line stays flat while the bright bands move up. Listen for the change before looking at the numbers.</p><p>Switch the lens to <b>Harmonics</b>: the fine lines stay the same distance apart in both sounds. Switch back to <b>Vowel bands</b> to see where the energy collects.</p><small class="mut">Both sounds are generated in your browser. Your microphone is off until you start it.</small></aside></div></section>
+<section class="board compare section"><div class="ey">Listening bench / temporary pins</div><h2>Same words, two takes</h2><p class="sub">Pin up to three seconds ending at the cursor (or now, if live). Keep the mic, distance, vowel and level alike. Use a held vowel for bands; use a short sentence for melody. Pins last until you clear them or close this page.</p><div class="pins"><div class="pin"><b>A · Reference</b><p id="metaA" class="sub">Empty</p><div class="btns"><button id="pinA">Pin A</button><button id="hearA" disabled>Hear A</button></div></div><div class="pin"><b>B · Comparison</b><p id="metaB" class="sub">Empty</p><div class="btns"><button id="pinB">Pin B</button><button id="hearB" disabled>Hear B</button></div></div></div><div class="tablewrap"><table><thead><tr><th>In this excerpt</th><th>A</th><th>B</th><th>B − A</th></tr></thead><tbody id="rows"></tbody></table></div><p class="sub">Medians on accepted frames; band rows use just frames with a usable pair. “—” means too little evidence. A semitone (st) is a relative pitch step. Differences describe the clips, not whether one is better.</p><button id="clear">Clear pins</button></section>
+<details class="board guide"><summary>Show the work · methods, limits &amp; privacy</summary><ul><li>The mic stays off until you press Start. When live, the most recent eight seconds are kept in RAM. Freeze releases the microphone, keeps that window, and unlocks scrubbing. Hearing a pin also releases a live microphone first. Audio analysis happens on your device. No audio or measurements are uploaded, and no recordings are saved. Reloading clears everything.</li><li>The inspector uses 64 ms of mono audio every 40 ms. Pitch is an estimate of the repetition frequency, not the brightest line. Blank or sudden octave jumps can mean the tracker lost a period, especially on creak. Fan hum, music or another speaker can look voiced too.</li><li>The spectrogram uses 64 ms (Harmonics) and 6 ms (Vowel bands) Hann windows, each on a fixed −80 to 0 dBFS display scale. The first two supported peaks of a 14-pole LPC envelope give tentative F1/F2 estimates. Two window lengths reveal different things: long windows separate harmonic lines; short windows blur them together to show broad regions of energy. Formants are resonances of the vocal tract, sampled by those harmonics. Gold markers are tentative band centers, not measurements of tract length; an isolated vowel is far easier than running speech or high F0.</li><li>Periodicity describes how closely cycles repeat. Noise, irregular phonation and a moving pitch all affect it. Upper/lower balance is the ratio of energy at 1.5–4 kHz to 0.2–1.5 kHz, in dB. Vowel, pitch, level, room and mic can all move it. Neither value isolates breathiness, fold contact or vocal weight.</li><li>Level is digital dBFS, not calibrated room loudness. The browser is asked to disable echo cancellation, gain control and noise suppression; hardware or OS processing can remain. Pitch span is the 25th-to-75th percentile interval of accepted F0 in semitones, not an expressiveness score. Pauses are timing, not mistakes.</li><li>Try a comfortable sound; if it feels scratchy or strained, stop. Higher, brighter and more periodic are not goals. Pick the sound <em>you</em> want to hear again.</li></ul><p class="meta" id="chain">Input: synthetic example.</p></details><footer>Voiceglass 0.1 · Moonwood instrument bench · browser edition · audio stays on your device</footer></main>
+<script>/* Voiceglass: synchronous analysis of ONE mono, linear float PCM frame. No I/O.
+ * Use a classic <script> (DSP.analyze), or require('./dsp.js'). Frames contain
+ * round(rate * .064) samples; a caller using a fractional sample clock may
+ * also pass floor/ceil. The only cached state is a plan for the last size/rate;
+ * estimates are never carried between frames and output columns are owned by
+ * the caller. No decoding, automatic gain adjustment, or pitch smoothing.
+ */
+const DSP = (() => {
+  'use strict';
+  const ROWS = 240, TOP = 6000, INTERNAL = 12000, TAU = 2 * Math.PI;
+  const BOTTOM_DB = -80, MIN_RMS = 0.00063; // about -64 dBFS, AC only
+  let lastPlan;
+
+  function hann(length) {
+    return Float64Array.from({length}, (_, i) => 0.5 - 0.5 * Math.cos(TAU * i / (length - 1)));
+  }
+
+  function planFor(rate, length) {
+    if (lastPlan && lastPlan.rate === rate && lastPlan.length === length) return lastPlan;
+    // Zero-padding samples the 6 ms lobe on the same frequency grid; it does
+    // not give the wideband estimate the 64 ms window's resolving power.
+    let size = 1;
+    while (size < Math.max(length, rate * (ROWS - 1) / TOP)) size *= 2;
+    const reverse = new Uint32Array(size);
+    for (let i = 1; i < size; i++) reverse[i] = (reverse[i >> 1] >> 1) | ((i & 1) * size / 2);
+    const cos = Float64Array.from({length: size / 2}, (_, i) => Math.cos(TAU * i / size));
+    const sin = Float64Array.from({length: size / 2}, (_, i) => -Math.sin(TAU * i / size));
+    const long = hann(length), short = hann(Math.round(rate * 0.006));
+    const sum = w => w.reduce((a, b) => a + b, 0);
+
+    // Windowed-sinc lowpass for the pitch/LPC branch only. Tabulate one FIR
+    // stencil per output sample. At the outside edges truncate and renormalize.
+    const count = Math.round(length * INTERNAL / rate);
+    const cutoff = 0.43 * INTERNAL / rate, radius = Math.ceil(6 * rate / INTERNAL);
+    const taps = 2 * radius + 1, starts = new Int32Array(count);
+    const kernel = new Float64Array(count * taps);
+    for (let i = 0; i < count; i++) {
+      const pos = (i + 0.5) * rate / INTERNAL - 0.5;
+      const start = starts[i] = Math.max(0, Math.min(length - taps, Math.floor(pos) - radius));
+      let total = 0;
+      for (let t = 0; t < taps; t++) {
+        const d = start + t - pos;
+        if (Math.abs(d) > radius) continue;
+        const sinc = Math.abs(d) < 1e-10 ? 2 * cutoff : Math.sin(TAU * cutoff * d) / (Math.PI * d);
+        total += kernel[i * taps + t] = sinc * (0.5 + 0.5 * Math.cos(Math.PI * d / radius));
+      }
+      for (let t = 0; t < taps; t++) kernel[i * taps + t] /= total;
+    }
+    const lpcWin = hann(count);
+    lastPlan = {rate, length, size, reverse, cos, sin, long, short, longSum: sum(long), shortSum: sum(short),
+      re: new Float64Array(size), im: new Float64Array(size), power: new Float64Array(size / 2 + 1),
+      count, starts, taps, kernel, lpcWin};
+    return lastPlan;
+  }
+
+  // Radix-2 DIT FFT. Input placed directly in bit-reversed order. The output
+  // is peak sinusoid amplitude squared, calibrated by coherent window gain.
+  function spectrum(x, p, win, sum) {
+    const {size, re, im, reverse, cos, sin, power} = p;
+    re.fill(0); im.fill(0);
+    const start = (x.length - win.length) >> 1;
+    for (let i = 0; i < win.length; i++) re[reverse[i]] = x[start + i] * win[i];
+    for (let step = 2; step <= size; step *= 2) {
+      const half = step / 2, stride = size / step;
+      for (let j = 0; j < size; j += step) {
+        for (let k = 0, t = 0; k < half; k++, t += stride) {
+          const a = j + k, b = a + half;
+          const vr = re[b] * cos[t] - im[b] * sin[t], vi = re[b] * sin[t] + im[b] * cos[t];
+          re[b] = re[a] - vr; im[b] = im[a] - vi;
+          re[a] += vr; im[a] += vi;
+        }
+      }
+    }
+    const scale = 4 / (sum * sum);
+    for (let k = 0; k < power.length; k++) power[k] = scale * (re[k] * re[k] + im[k] * im[k]);
+    power[0] *= 0.25; power[size / 2] *= 0.25;
+    return power;
+  }
+
+  // A row represents the frequency interval nearest its center r*6000/239.
+  // Max over that interval (never average away a thin partial). Both views
+  // use fixed -80..0 dBFS peak amplitude -> 0..255, without frame normalization.
+  function column(power, binHz) {
+    const result = new Uint8Array(ROWS), rowHz = TOP / (ROWS - 1);
+    let k = 0;
+    for (let r = 0; r < ROWS; r++) {
+      const end = Math.min(Math.ceil((r + 0.5) * rowHz / binHz), Math.floor(TOP / binHz) + 1);
+      let max = 0;
+      while (k < end) max = Math.max(max, power[k++]);
+      const db = 10 * Math.log10(Math.max(1e-8, max));
+      result[r] = Math.round(255 * Math.min(1, (db - BOTTOM_DB) / -BOTTOM_DB));
+    }
+    return result;
+  }
+
+  function bandBalance(power, binHz) {
+    const sum = (lo, hi) => {
+      let s = 0;
+      for (let k = Math.ceil(lo / binHz); k < Math.ceil(hi / binHz); k++) s += power[k];
+      return s;
+    };
+    const low = sum(200, 1500), high = sum(1500, 4000), total = low + high;
+    if (total < 1e-10) return null;
+    // Relative floor avoids infinities for single-band fixtures (limit ±80 dB).
+    return 10 * Math.log10(Math.max(high, total * 1e-8) / Math.max(low, total * 1e-8));
+  }
+
+  function decimate(x, p, mean) {
+    const y = new Float64Array(p.count);
+    for (let i = 0; i < y.length; i++) {
+      let s = 0;
+      for (let j = p.starts[i], t = i * p.taps, end = t + p.taps; t < end; t++, j++) s += x[j] * p.kernel[t];
+      y[i] = s - mean;
+    }
+    return y;
+  }
+
+  function pitch(y) {
+    // Normalized correlation on the overlapping signal, not on a tapered
+    // window (which would penalize long periods). Compare refined peak heights
+    // and choose the earliest near-best one, rather than the loudest harmonic.
+    const maxLag = Math.ceil(INTERNAL / 65) + 1, corr = new Float64Array(maxLag + 1);
+    const energy = new Float64Array(y.length + 1);
+    for (let i = 0; i < y.length; i++) energy[i + 1] = energy[i] + y[i] * y[i];
+    const total = energy[y.length];
+    if (total < MIN_RMS ** 2 * y.length) return null;
+    for (let d = 1; d <= maxLag; d++) {
+      let dot = 0;
+      for (let i = d; i < y.length; i++) dot += y[i] * y[i - d];
+      const denom = Math.sqrt((total - energy[d]) * energy[y.length - d]);
+      corr[d] = denom > 0 ? dot / denom : 0;
+    }
+    const peaks = [];
+    let best = 0;
+    for (let d = 2; d < maxLag; d++) {
+      const a = corr[d - 1], b = corr[d], c = corr[d + 1];
+      if (!(a < b && b >= c && b > 0.65)) continue;
+      const shift = 0.5 * (a - c) / (a + c - 2 * b);
+      const score = Math.min(1, b - 0.25 * (a - c) * shift);
+      peaks.push({lag: d + shift, score}); best = Math.max(best, score);
+    }
+    const pick = peaks.find(q => q.score >= Math.max(0.77, best - 0.035));
+    if (!pick) return null;
+    const hz = INTERNAL / pick.lag;
+    // Look below the minimum lag too, so an above-range tone isn't reported
+    // at one-half its frequency. Allow for interpolation at the exact endpoints.
+    if (hz < 64.8 || hz > 501) return null;
+    return {f0: Math.max(65, Math.min(500, hz)), periodicity: pick.score};
+  }
+
+  function lpcEnvelope(y, win) {
+    // Autocorrelation LPC, Levinson-Durbin. 14 poles at 12 kHz leave room
+    // for high resonances without trying to fit each harmonic of the source.
+    const order = 14, z = new Float64Array(y.length), r = new Float64Array(order + 1);
+    for (let i = 1; i < y.length; i++) z[i] = (y[i] - 0.96 * y[i - 1]) * win[i];
+    for (let k = 0; k <= order; k++) {
+      let s = 0;
+      for (let i = k; i < z.length; i++) s += z[i] * z[i - k];
+      r[k] = s;
+    }
+    let err = r[0] * 1.00001, a = new Float64Array(order + 1);
+    a[0] = 1;
+    for (let k = 1; k <= order; k++) {
+      let s = r[k];
+      for (let i = 1; i < k; i++) s += a[i] * r[k - i];
+      const refl = -s / err;
+      if (!(Math.abs(refl) < 1)) return null;
+      const next = a.slice();
+      next[k] = refl;
+      for (let i = 1; i < k; i++) next[i] += refl * a[k - i];
+      a = next; err *= 1 - refl * refl;
+    }
+    const step = 10, env = new Float64Array(4300 / step + 1);
+    for (let k = 0; k < env.length; k++) {
+      const angle = TAU * k * step / INTERNAL, c = Math.cos(angle), s = Math.sin(angle);
+      let re = 0, im = 0;
+      for (let i = order; i >= 0; i--) {
+        const rotated = re * c - im * s;
+        im = re * s + im * c; re = rotated + a[i];
+      }
+      env[k] = -10 * Math.log10(Math.max(1e-20, re * re + im * im));
+    }
+    return env;
+  }
+
+  function formants(y, p, power, binHz, f0) {
+    // Validate LPC against independent partial amplitudes. A line (or sparse
+    // chord) can give an all-pole fit impressive-looking but meaningless poles.
+    const partial = [0];
+    for (let h = 1; h * f0 < 4400; h++) {
+      const center = h * f0, radius = Math.min(42, f0 * 0.32);
+      let max = 0;
+      for (let k = Math.ceil((center - radius) / binHz); k <= Math.floor((center + radius) / binHz); k++) max = Math.max(max, power[k]);
+      partial.push(max);
+    }
+    const strongest = Math.max(...partial);
+    if (!strongest || partial.filter(v => v > strongest * 0.0001).length < 6) return null;
+    // Light de-tilt before asking whether measured harmonics rise and fall
+    // near each proposed resonance. Never derive a formant from F0 alone.
+    const db = partial.map((v, h) => 10 * Math.log10(Math.max(v, strongest * 1e-10)) + 10 * Math.log10(Math.max(1, h)));
+    const env = lpcEnvelope(y, p.lpcWin);
+    if (!env) return null;
+    const peaks = [];
+    for (let i = 18; i <= 355; i++) {
+      if (!(env[i] > env[i - 1] && env[i] >= env[i + 1])) continue;
+      let l = i - 1, r = i + 1;
+      while (l > 0 && env[l] > env[i] - 3) l--;
+      while (r < env.length - 1 && env[r] > env[i] - 3) r++;
+      const width = (r - l) * 10;
+      if (width < 40 || width > 730 || env[i] - Math.max(env[l], env[r]) < 3) continue;
+      const freq = i * 10;
+      const h = Math.max(1, Math.round(freq / f0));
+      // A resonant peak needs shoulders, not just one isolated harmonic.
+      const neighbor = Math.max(partial[h - 1] || 0, partial[h + 1] || 0);
+      if (neighbor < partial[h] * 0.003 || partial[h] < strongest * 0.00002) continue;
+      peaks.push({freq, h});
+    }
+    if (peaks.length < 2) return null;
+    const [a, b] = peaks;
+    if (a.freq > 1150 || b.freq < 650 || b.freq - a.freq < Math.max(260, 1.8 * f0)) return null;
+    // The measured, de-tilted spectrum must support two humps and a valley.
+    // At high F0 tight formants may not be resolvable: a missing pair is OK.
+    let valley = Infinity;
+    for (let h = a.h + 1; h < b.h; h++) valley = Math.min(valley, db[h]);
+    const after = db.slice(b.h + 1, b.h + 1 + Math.max(2, Math.ceil(400 / f0)));
+    if (Math.min(db[a.h], db[b.h]) - valley < 2.5 || db[b.h] - Math.min(...after) < 2.5) return null;
+    return {f1: a.freq, f2: b.freq};
+  }
+
+  function analyze(samples, rate) {
+    // isView + tag also accepts Float32Array from another browser realm.
+    if (!ArrayBuffer.isView(samples) || Object.prototype.toString.call(samples) !== '[object Float32Array]') throw new TypeError('Expected mono Float32Array PCM');
+    if (!Number.isInteger(rate) || rate < 32000 || rate > 96000) throw new RangeError('Expected sample rate in 32000..96000 Hz');
+    const n = samples.length;
+    if (n < Math.floor(rate * 0.064) || n > Math.ceil(rate * 0.064)) throw new RangeError('Expected 64 ms of PCM');
+    let sum = 0, sq = 0, hi = -Infinity, lo = Infinity, railPairs = 0;
+    for (let i = 0; i < n; i++) {
+      const v = samples[i];
+      if (!Number.isFinite(v)) throw new RangeError('Non-finite PCM sample');
+      sum += v; sq += v * v; hi = Math.max(hi, v); lo = Math.min(lo, v);
+      if (i && Math.abs(v) >= 0.99995 && v * samples[i - 1] >= 0.99995 ** 2) railPairs++;
+    }
+    const rms = Math.sqrt(sq / n), mean = sum / n, peak = Math.max(Math.abs(hi), Math.abs(lo));
+    const active = sq / n - mean * mean >= MIN_RMS ** 2;
+    let flat = 0;
+    for (let i = 1; i < n; i++) {
+      const v = samples[i];
+      // Ignore a pulse train's zero baseline. Count plateaus at appreciable
+      // extrema, not isolated extrema (a full-scale sine can touch the rail).
+      if (v === samples[i - 1] && Math.abs(v) > 0.25 * peak && (v === hi || v === lo)) flat++;
+    }
+    const clipped = peak > 1.00001 || railPairs / n > 0.008 || flat / n > 0.025;
+    const p = planFor(rate, n), binHz = rate / p.size;
+    const power = spectrum(samples, p, p.long, p.longSum);
+    const out = {f0: null, db: 20 * Math.log10(Math.max(1e-6, rms)), peak, periodicity: null,
+      balance: active ? bandBalance(power, binHz) : null, f1: null, f2: null,
+      narrow: column(power, binHz), wide: null};
+    if (active && !clipped) {
+      const y = decimate(samples, p, mean), voice = pitch(y);
+      if (voice) {
+        Object.assign(out, voice);
+        const pair = formants(y, p, power, binHz, voice.f0);
+        if (pair) Object.assign(out, pair);
+      }
+    }
+    out.wide = column(spectrum(samples, p, p.short, p.shortSum), binHz);
+    return out;
+  }
+  return Object.freeze({analyze});
+})();
+if (typeof module !== 'undefined') module.exports = DSP;
+</script><script>const Lessons = {
+ pitch:['Harmonic lines are like ruled paper: the distance <em>between</em> lines is F0. In the example the second sound glides up; the lines fan apart. The filter that makes the vowel stays fixed.', 'On one easy “ah,” glide just a little. Watch the mint contour below the spectrogram; then switch to Vowel bands. Can you tell which moved?', 'A darker or brighter stripe is not automatically a higher pitch. Some harmonics light up because they land near a resonance.','narrow'],
+ size:['Switch to Vowel bands. In the second sound, the broad bright bands shift upward together while the mint pitch trace stays level. This is a model of one cue to a smaller-sounding space.', 'Say the same comfortable vowel two ways. Keep pitch about steady. Look in the middle of each vowel: did several broad bands move, or only the lowest one? Pin both and listen before deciding which sounds smaller.', 'Changing from “oo” to “ee” can move bands dramatically without being a change of overall size. Even matching F1/F2 shifts do not measure anatomy or settle perceived size.','wide'],
+ air:['The second synthetic vowel adds noise. Look for a grainy wash <em>between</em> its harmonic lines rather than just more brightness. Check whether the periodicity readout changes with it.', 'Use the same vowel and mic distance. Pin two sounds, listen for air mixed with the vowel, then inspect their periodicity. Try “sss” afterward: lots of noise there, but no voiced vowel to grade.', 'Fans, mic hiss, reverb, pitch movement and creak can also lower periodicity. A blank pitch estimate is missing evidence, not maximum breathiness.','narrow'],
+ weight:['In the second sound the upper harmonics carry more energy relative to the lower ones. Their spacing stays put. This is an example of a spectral change, not a simulation of heavier vocal folds.', 'Keep pitch, vowel and mic distance similar. Pin a pair you hear as lighter and heavier. Listen blind to the numbers first; then ask whether their upper/lower balance also differs.', 'A louder take, a different vowel or mic EQ can move this number too. No mic-only meter here can tell you how firmly your folds make contact.','narrow'],
+ prosody:['The example plays the same little three-pulse phrase twice. Watch where its pitch turns, how far it travels, and where the quiet gaps land. Only the second ending descends.', 'Say “I left the light on” once as news and once as a question. Freeze after each. Compare where the turn starts, which syllable lasts, and what happens on “on.”', 'A pause or an unpitched consonant isn’t a failed note. The contour leaves a gap when it cannot track. Phrase-final drift is information, not a reset of your voice.','narrow']
+};
+// A deliberately simple source-filter instrument, not recorded speech. A common resonator
+// envelope weights harmonics. Only the selected parameter differs between the two halves.
+function synthExample(kind){
+ const rate=32000, data=new Float32Array(8*rate), tau=2*Math.PI, block=160;
+ let phase=0, seed=42, lastNoise=0;
+ for(let start=0;start<data.length;start+=block){
+  const t=start/rate,b=t>=4,u=t-(b?4:0)-.40,dur=3.22;
+  if(u<0||u>=dur)continue;
+  const v=u/dur, glide=Math.min(1,Math.max(0,(v-.10)/.70)),smooth=glide*glide*(3-2*glide);
+  let f=155, pulse=1;
+  if(kind==='pitch'&&b) f+=74*smooth;
+  if(kind==='prosody'){const p=u%1.10;pulse=Math.min(1,Math.max(0,p/.085),Math.max(0,(.86-p)/.12));f+=15*Math.sin(Math.PI*Math.min(1,p/.86));if(b&&u>2.20) f-=42*Math.min(1,(u-2.20)/.86);}
+  const scale=kind==='size'&&b?1.27:1,fs=[560,1530,2480,3450].map(x=>x*scale),bw=[85,125,175,240],amp=[],sn=[],cs=[],ss=[],cc=[];
+  const nh=Math.floor(6800/f);let norm=0;
+  for(let h=1;h<=nh;h++) {const hz=h*f;let e=.11;for(let j=0;j<4;j++)e+=[1.9,1.45,.85,.52][j]/(1+((hz-fs[j])/(bw[j]*.65))**2);const a=e/(h**((kind==='weight'&&b)?.52:1.02));amp.push(a);norm+=a*a;sn.push(Math.sin(h*phase));cs.push(Math.cos(h*phase));ss.push(Math.sin(tau*h*f/rate));cc.push(Math.cos(tau*h*f/rate));}
+  const gain=.15/Math.sqrt(norm/2), noisy=kind==='air'&&b;
+  for(let j=0;j<block;j++){let y=0;for(let k=0;k<nh;k++){const s=sn[k],c=cs[k];y+=amp[k]*s;sn[k]=s*cc[k]+c*ss[k];cs[k]=c*cc[k]-s*ss[k];}seed=(Math.imul(1664525,seed)+1013904223)>>>0;const noise=seed/2147483648-1;
+    const shape=pulse*Math.min(1,(u+j/rate)/.07,Math.max(0,(dur-u-j/rate)/.1));data[start+j]=shape*(gain*y+(noisy?.24*(noise-.45*lastNoise):0));lastNoise=noise;}
+  phase=(phase+tau*f*block/rate)%tau;
+ }
+ return {rate,data};
+}
+if(typeof module!=='undefined')module.exports={synthExample,Lessons};</script><script>'use strict';
+const $=id=>document.getElementById(id), put=(id,txt)=>{$(id).textContent=txt}, msg=s=>put('msg',s);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),fmt=(v,n=0)=>Number.isFinite(v)?v.toFixed(n):'—';
+const ctxClass=window.AudioContext||window.webkitAudioContext;
+class Buffer8 {
+ constructor(rate){this.rate=rate;this.buf=new Float32Array(rate*8);this.n=0;this.frames=[];this.hop=Math.round(.04*rate);this.win=Math.round(.064*rate);this.next=this.win;}
+ slice(a,b){a=Math.max(0,this.n-this.buf.length,a);b=Math.min(this.n,b);const out=new Float32Array(Math.max(0,b-a)),p=a%this.buf.length,k=Math.min(out.length,this.buf.length-p);out.set(this.buf.subarray(p,p+k));if(k<out.length)out.set(this.buf.subarray(0,out.length-k),k);return out;}
+ push(x){let pos=0;while(pos<x.length){const i=this.n%this.buf.length,k=Math.min(x.length-pos,this.buf.length-i,this.next-this.n);this.buf.set(x.subarray(pos,pos+k),i);this.n+=k;pos+=k;if(this.n===this.next){const f=DSP.analyze(this.slice(this.n-this.win,this.n),this.rate);f.t=this.n;this.frames.push(f);this.next+=this.hop;}}
+ const first=this.n-this.buf.length;while(this.frames.length&&this.frames[0].t-this.win<first)this.frames.shift();}
+}
+let store=null, origin='example', exampleName='pitch', live=false,pending=false,epoch=0,active=null,position=0,pins={A:null,B:null},outCtx=null,playing=null,playKey=0,renderId=0;
+const q=(a,p)=>{const k=(a.length-1)*p,i=Math.floor(k);return a[i]+(a[Math.ceil(k)]-a[i])*(k-i)};
+function summary(frames){const col=(key)=>frames.map(x=>x[key]).filter(Number.isFinite).sort((a,b)=>a-b), hz=col('f0'),med=(key,min=5)=>{const a=col(key);return a.length>=min?q(a,.5):null};return {hz:hz.length>=5?q(hz,.5):null,iqr:hz.length>=5?12*Math.log2(q(hz,.75)/q(hz,.25)):null,db:med('db'),f1:med('f1'),f2:med('f2'),periodicity:med('periodicity'),balance:med('balance'),accepted:hz.length,total:frames.length,bands:col('f2').length};}
+function selection(){const fs=store?.frames;if(!fs?.length)return null;const end=fs[position].t,start=Math.max(0,store.n-store.buf.length,end-3*store.rate);return {start,end,frames:fs.filter(f=>f.t-store.win>=start&&f.t<=end)};}
+function sourceName(){return origin==='mic'?'Microphone':$('lesson').options[[...$('lesson').options].findIndex(o=>o.value===exampleName)].text.replace(/^\d+ · /,'Example: ')}
+function controls(){const frames=store?.frames||[], has=!!frames.length; $('start').disabled=live||pending;$('stop').disabled=!live&&!pending;$('example').disabled=pending;$('play').disabled=!has||pending;$('cursor').disabled=live||!has||pending;$('pinA').disabled=$('pinB').disabled=!has||pending;$('stopplay').disabled=!playing;
+ $('micstate').classList.toggle('on',live||pending);put('micstate',pending?'Waiting for mic':live?'● Microphone live':'Microphone off');put('source',origin==='mic'?(live?'Live · microphone':'Frozen · microphone'):'Synthetic · '+sourceName());put('inspecttitle',live?'Latest frame':'At cursor');}
+const chart=$('plot'),g=chart.getContext('2d'),imgCanvas=document.createElement('canvas'),ig=imgCanvas.getContext('2d');
+const stops=[[0,[24,18,29]],[.22,[48,32,60]],[.44,[97,59,97]],[.66,[173,101,134]],[.84,[234,169,142]],[1,[255,239,190]]];const lut=Array.from({length:256},(_,k)=>{const v=k/255;let i=1;while(stops[i][0]<v)i++;const [a,b]=[stops[i-1],stops[i]],r=(v-a[0])/(b[0]-a[0]);return a[1].map((c,j)=>Math.round(c+(b[1][j]-c)*r));});
+function plot(){const w=chart.clientWidth,h=chart.clientHeight,d=Math.min(2,devicePixelRatio||1);if(!w||!h)return;if(chart.width!==Math.round(w*d)||chart.height!==Math.round(h*d)){chart.width=Math.round(w*d);chart.height=Math.round(h*d);}g.setTransform(d,0,0,d,0,0);g.fillStyle='#18121d';g.fillRect(0,0,w,h);
+ const l=43,r=w-10,top=10,base=h*.66,pTop=base+14,pBottom=h-23,frames=store?.frames||[],rate=store?.rate||48000,end=Math.max(rate*8,store?.n||0),start=end-8*rate,X=t=>l+(t-start)*(r-l)/(end-start),Y=f=>base-(f/6000)*(base-top),P=f=>pBottom-Math.log(f/65)/Math.log(500/65)*(pBottom-pTop);
+ if(frames.length){const n=frames.length,key=$('lens').value;if(imgCanvas.width!==n||imgCanvas.height!==240){imgCanvas.width=n;imgCanvas.height=240;}const image=ig.createImageData(n,240),a=image.data;for(let i=0;i<n;i++){const z=frames[i][key];for(let j=0;j<240;j++){const k=4*((239-j)*n+i),c=lut[z[j]];a[k]=c[0];a[k+1]=c[1];a[k+2]=c[2];a[k+3]=255;}}ig.putImageData(image,0,0);g.imageSmoothingEnabled=false;const x=X(frames[0].t-store.win/2-store.hop/2);g.drawImage(imgCanvas,x,top,n*store.hop/rate/8*(r-l),base-top);}
+ g.font='11px ui-monospace, Consolas, monospace';g.textAlign='right';g.lineWidth=1;function grid(y,label){g.fillStyle='#c4b7c9';g.fillText(label,l-5,y+3);g.strokeStyle='rgba(222,208,225,.15)';g.beginPath();g.moveTo(l,y);g.lineTo(r,y);g.stroke();}
+ [0,2000,4000,6000].forEach(v=>grid(Y(v),v===0?'0 Hz':v/1000+'k'));[80,160,320].forEach(v=>grid(P(v),v+' '));g.fillStyle='#c4b7c9';g.textAlign='center';for(let t=Math.ceil(start/rate);t<=end/rate;t++){const x=X(t*rate);g.strokeStyle='rgba(222,208,225,.10)';g.beginPath();g.moveTo(x,top);g.lineTo(x,pBottom);g.stroke();if(t%2===0){g.fillStyle='#c4b7c9';g.fillText(t+'s',clamp(x,l,r-7),h-6);}}
+ if($('overlay').checked){g.fillStyle='#ffda94';for(const f of frames){if(!f.f1||!f.f2)continue;const x=X(f.t-store.win/2);for(const v of [f.f1,f.f2])g.fillRect(x-1,Y(v)-1,2,2);}}
+ g.beginPath();g.strokeStyle='#9de6d6';g.lineWidth=2;let last=null;for(const f of frames){if(!f.f0){last=null;continue;}const x=X(f.t-store.win/2),y=P(f.f0);if(!last||Math.abs(Math.log2(last/f.f0))>.6)g.moveTo(x,y);else g.lineTo(x,y);last=f.f0;}g.stroke();
+ if(origin==='example'&&frames.length){g.save();g.font='11px ui-monospace, Consolas, monospace';g.textAlign='left';for(const [t,s] of [[.4,'1 / Reference'],[4.4,'2 / Change']]){const x=X(t*rate);g.fillStyle='#211b27';g.fillRect(x,top+1,g.measureText(s).width+10,18);g.fillStyle='#f4edf3';g.fillText(s,x+5,top+14);}g.restore();}
+ if(frames.length&&!live){const x=X(frames[position].t-store.win/2);g.strokeStyle='#fff0de';g.lineWidth=1;g.setLineDash([3,3]);g.beginPath();g.moveTo(x,top);g.lineTo(x,pBottom);g.stroke();g.setLineDash([]);} }
+function update(){renderId=0;let fs=store?.frames||[];if(live)position=fs.length-1;position=clamp(position,0,Math.max(0,fs.length-1));const f=fs[position]||{},seg=selection(),s=seg?summary(seg.frames):{};put('pitch',f.f0?fmt(f.f0)+' Hz':'—');put('level',Number.isFinite(f.db)&&f.peak>0?fmt(f.db)+' dBFS':'—');put('bands',f.f1&&f.f2?fmt(f.f1)+' / '+fmt(f.f2)+' Hz':'—');put('period',fmt(f.periodicity,2));put('bal',Number.isFinite(f.balance)?fmt(f.balance,1)+' dB':'—');put('med',s.hz?fmt(s.hz)+' Hz':'—');put('iqr',Number.isFinite(s.iqr)?fmt(s.iqr,1)+' st':'—');put('ctime',seg?fmt((seg.end-store.win/2)/store.rate,2)+' s':'—');put('quality',!fs.length?'Waiting for samples.':f.peak>=.985?'Near full scale. Back off the mic or input gain.':!f.f0?'No dependable pitch in this frame.':f.f1?'Periodic signal · tentative vowel bands.':'Periodic signal · no reliable band pair.');$('cursor').max=Math.max(0,fs.length-1);$('cursor').value=position;controls();plot();}
+function soon(){if(!renderId)renderId=requestAnimationFrame(update);}
+function showLesson(){const a=Lessons[$('lesson').value];['look','try','trap'].forEach((key,i)=>$(key).innerHTML='<b>'+['Look.','Try.','Watch out.'][i]+'</b> '+a[i]);}
+function stopSound(){++playKey;const p=playing;playing=null;if(p){p.onended=null;try{p.stop();p.disconnect();}catch{}}$('stopplay').disabled=true;}
+function release(){epoch++;pending=false;live=false;const a=active;active=null;if(a){a.stream?.getTracks().forEach(t=>{t.onended=null;t.stop()});if(a.tap){a.tap.port.onmessage=null;a.tap.port.close();a.tap.disconnect();}a.source?.disconnect();a.mute?.disconnect();if(a.ctx&&a.ctx.state!=='closed')a.ctx.close().catch(()=>{});}controls();}
+function freeze(){release();position=Math.max(0,(store?.frames.length||0)-1);update();msg('Microphone released. Inspect a moment, pin a phrase, or listen back.');}
+function loadExample(announce=true){release();stopSound();exampleName=$('lesson').value;const a=synthExample(exampleName);store=new Buffer8(a.rate);store.push(a.data);position=store.frames.findIndex(f=>f.t>=6.3*store.rate);origin='example';$('lens').value=Lessons[exampleName][3];put('chain','Input: generated source/filter example at '+a.rate+' Hz. Not a recording of a person.');update();if(announce)msg('Worked example loaded. Listen to the whole window: first the reference, then the changed sound.');}
+async function play(data,rate){if(live||pending)freeze();stopSound();const key=playKey;if(!data?.length)return;try{outCtx??=new ctxClass();await outCtx.resume();if(key!==playKey)return;const b=outCtx.createBuffer(1,data.length,rate);b.copyToChannel(data,0);const p=outCtx.createBufferSource();p.buffer=b;p.connect(outCtx.destination);playing=p;p.onended=()=>{if(playing===p){playing=null;p.disconnect();controls();msg('Playback finished. Microphone off.');}};p.start();controls();msg('Playing locally. Microphone off.');}catch(e){msg('Playback unavailable: '+e.message);controls();}}
+const worklet=`class VoiceglassTap extends AudioWorkletProcessor{constructor(){super();this.buf=new Float32Array(1024);this.pos=0;}process(inputs){const x=inputs[0][0];if(x){for(let i=0;i<x.length;i++){this.buf[this.pos++]=x[i];if(this.pos===1024){this.port.postMessage(this.buf,[this.buf.buffer]);this.buf=new Float32Array(1024);this.pos=0;}}}return true;}}registerProcessor('voiceglass-tap',VoiceglassTap);`;
+async function start(){if(live||pending)return;stopSound();const k=++epoch;pending=true;controls();msg('Allow mic access in the browser. You can cancel with Freeze.');try{if(!navigator.mediaDevices?.getUserMedia||!ctxClass)throw Error('Open this HTTPS page directly in desktop Chrome or Edge.');const ctx=new ctxClass({sampleRate:48000,sinkId:{type:'none'}});const a={ctx};active=a;await ctx.resume();if(k!==epoch)return;if(!ctx.audioWorklet)throw Error('AudioWorklet unavailable. Open this HTTPS page directly in desktop Chrome or Edge.');const stream=await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});if(k!==epoch){stream.getTracks().forEach(t=>t.stop());return;}a.stream=stream;const track=stream.getAudioTracks()[0];if(!track)throw Error('No audio track.');await ctx.audioWorklet.addModule('data:text/javascript;charset=utf-8,'+encodeURIComponent(worklet),{credentials:'omit'});if(k!==epoch)return;const tap=a.tap=new AudioWorkletNode(ctx,'voiceglass-tap');const source=a.source=ctx.createMediaStreamSource(stream);const mute=a.mute=ctx.createGain();mute.gain.value=0;source.connect(tap);tap.connect(mute);mute.connect(ctx.destination);store=new Buffer8(ctx.sampleRate);origin='mic';position=0;live=true;pending=false;tap.port.onmessage=e=>{if(live&&k===epoch){store.push(e.data);soon();}};track.onended=()=>{if(k===epoch){freeze();msg('The input device disconnected. Its last window is frozen.');}};a.tap.onprocessorerror=()=>{if(k===epoch){freeze();msg('Capture stopped: the browser audio processor could not continue.');}};setTimeout(()=>{if(k===epoch&&live&&!store.n){freeze();msg('No audio frames arrived. Microphone released. Check your input device or try another desktop browser.');}},3500);if(ctx.state!=='running')await ctx.resume();if(k!==epoch)return;const s=track.getSettings();put('chain','Input: '+(track.label||'default microphone')+' · analysis '+ctx.sampleRate+' Hz · echo cancellation '+(s.echoCancellation??'unknown')+' · automatic gain '+(s.autoGainControl??'unknown')+' · noise suppression '+(s.noiseSuppression??'unknown')+'.');msg('Live. Say a short phrase, then Freeze. No mic monitoring through the speakers.');update();}catch(e){if(k!==epoch)return;release();update();msg(e.name==='NotAllowedError'?'Microphone access was denied. Allow microphone access for this site in your browser and OS settings, then try again. The examples still work.':'Microphone not started: '+e.message);}}
+function pin(slot){const v=selection();if(!v)return;const data=store.slice(v.start,v.end);if(data.length<.2*store.rate){msg('Use at least 0.2 seconds of sound before pinning.');return;}pins[slot]={rate:store.rate,data,stats:summary(v.frames),name:sourceName(),start:v.start/store.rate,end:v.end/store.rate};compare();msg('Pinned '+slot+'. This excerpt stays in memory while you make the other take.');}
+function compare(){for(const k of ['A','B']){const p=pins[k];put('meta'+k,p?`${p.name} · ${p.start.toFixed(2)}–${p.end.toFixed(2)} s · ${p.stats.accepted}/${p.stats.total} frames pitched · ${p.stats.bands} band pairs`:'Empty');$('hear'+k).disabled=!p;put('pin'+k,p?'Replace '+k:'Pin '+k);}const defs=[['Median pitch','hz','Hz',0],['Pitch span (IQR)','iqr','st',1],['F1 candidate','f1','Hz',0],['F2 candidate','f2','Hz',0],['Periodicity','periodicity','',2],['Upper/lower balance','balance','dB',1],['Input RMS (all frames)','db','dBFS',1]];const row=document.createDocumentFragment();for(const [label,key,unit,d] of defs){let a=pins.A?.stats[key],b=pins.B?.stats[key];const tr=document.createElement('tr'),th=document.createElement('th');th.scope='row';th.textContent=label;tr.append(th);for(const v of [a,b]){const td=tr.insertCell();td.textContent=Number.isFinite(v)?fmt(v,d)+' '+unit:'—';}const td=tr.insertCell();if(Number.isFinite(a)&&Number.isFinite(b)){const diff=key==='hz'?12*Math.log2(b/a):b-a;td.textContent=(diff>0?'+':'')+fmt(diff,key==='hz'?1:d)+' '+(key==='hz'?'st':key==='db'?'dB':unit);}else td.textContent='—';row.append(tr);} $('rows').replaceChildren(row);$('clear').disabled=!pins.A&&!pins.B;}
+$('start').onclick=start;$('stop').onclick=freeze;$('play').onclick=()=>{if(store)play(store.slice(0,store.n),store.rate)};$('stopplay').onclick=()=>{stopSound();msg('Playback stopped.');};$('example').onclick=()=>loadExample();$('lesson').onchange=()=>{showLesson();if(origin==='example'&&!pending)loadExample();else msg('Guide changed. Load worked example replaces the current window; pins stay.');};$('lens').onchange=$('overlay').onchange=plot;$('cursor').oninput=()=>{position=Number($('cursor').value);update();};chart.onclick=e=>{if(live||pending||!store?.frames.length)return;const w=chart.clientWidth,end=Math.max(store.rate*8,store.n),t=(end/store.rate-8+8*clamp((e.clientX-chart.getBoundingClientRect().left-43)/(w-53),0,1))*store.rate;position=clamp(Math.round((t+store.win/2-store.frames[0].t)/store.hop),0,store.frames.length-1);update();};for(const k of ['A','B']){$('pin'+k).onclick=()=>pin(k);$('hear'+k).onclick=()=>{if(pins[k])play(pins[k].data,pins[k].rate);};}$('clear').onclick=()=>{stopSound();pins={A:null,B:null};compare();msg('Both pins cleared.');};window.addEventListener('pagehide',()=>{release();stopSound();});document.addEventListener('visibilitychange',()=>{if(document.hidden&&(live||pending)){freeze();msg('Microphone released when the page was hidden.');}});new ResizeObserver(soon).observe(chart);showLesson();compare();loadExample(false);
+</script></body></html>
